@@ -1,6 +1,12 @@
-let {$, sleep} = require('./funcs');
+let {$, sleep,} = require('./funcs');
  
 let sleepTime = 500;
+
+async function klick(row){
+  slots = await $('.slot'),
+  await slots[row].click(),
+  await sleep(sleepTime / 2)
+}
  
 module.exports = function(){
  
@@ -61,21 +67,13 @@ module.exports = function(){
     // clicking slots[1] is putting a coin in column 2
     // loop this shit!!!!
     // DOM need to regrab element.... DOM changed?
-    await slots[1].click()
-    await sleep(sleepTime)
-    await slots[6].click()
-    await sleep(sleepTime)
-    await slots[2].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[6].click()
-    await sleep(sleepTime)
-    await slots[3].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[6].click()
-    await sleep(sleepTime)
-    await slots[4].click()
+    await klick(1)
+    await klick(6)
+    await klick(2)
+    await klick(6)
+    await klick(3)
+    await klick(6)
+    await klick(4)
     // Game won how do i assert
     await sleep(sleepTime * 2)
  
@@ -84,9 +82,10 @@ module.exports = function(){
 
   this.Then(/^he\/she should win$/,async function () {
   let gameInfo = await driver.findElement(by.css('html > body > div > main > div.game > div.game-info > h3.mb-3 > span')).getText()
+  let winMessage = 'Spelare \d vann, efter \d drag!'
   await gameInfo
   // asserting agianst the text on the page
-  assert(gameInfo === 'Spelare \d vann, efter \d drag!', 'Matchar EJ')
+  assert(gameInfo === winMessage, 'Matchar EJ')
 
   });
 
