@@ -1,13 +1,7 @@
-let {$, sleep,} = require('./funcs');
+let {$, sleep, clickRow} = require('./funcs');
  
 let sleepTime = 500;
 
-async function klick(row){
-  slots = await $('.slot'),
-  await slots[row].click(),
-  await sleep(sleepTime / 2)
-}
- 
 module.exports = function(){
  
   // Background
@@ -61,19 +55,18 @@ module.exports = function(){
   this.When(/^the first player plays (\d+) bricks in a row horizontally$/, async function (brickstoWin) {
  
     // NOTE: Only began this code, by playing one brick
-    let slots = await $('.slot')
     // let gameInfo = await driver.findElement(by.css('html > body > div > main.container.mt-4.mb-3 > div.game > div.game-info > h3.mb-3.text-center > span'))
     // clicking slots[0] is putting a coin in column 1
     // clicking slots[1] is putting a coin in column 2
     // loop this shit!!!!
     // DOM need to regrab element.... DOM changed?
-    await klick(1)
-    await klick(6)
-    await klick(2)
-    await klick(6)
-    await klick(3)
-    await klick(6)
-    await klick(4)
+    await clickRow(1)
+    await clickRow(6)
+    await clickRow(2)
+    await clickRow(6)
+    await clickRow(3)
+    await clickRow(6)
+    await clickRow(4)
     // Game won how do i assert
     await sleep(sleepTime * 2)
  
@@ -96,24 +89,14 @@ module.exports = function(){
     // clicking slots[1] is putting a coin in column 2
     // loop this shit!!!!
     // DOM need to regrab element.... DOM changed?
-    await slots[1].click()
-    await sleep(sleepTime)
-    await slots[6].click()
-    await sleep(sleepTime)
-    await slots[2].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[6].click()
-    await sleep(sleepTime)
-    await slots[3].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[6].click()
-    await sleep(sleepTime)
-    await slots[1].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[6].click()
+    await clickRow(1)
+    await clickRow(6)
+    await clickRow(2)
+    await clickRow(6)
+    await clickRow(3)
+    await clickRow(6)
+    await clickRow(1)
+    await clickRow(6)
     // Game won how do i assert
     await sleep(sleepTime * 2)
  
@@ -127,32 +110,17 @@ module.exports = function(){
     // clicking slots[1] is putting a coin in column 2
     // loop this shit!!!!
     // DOM need to regrab element.... DOM changed?
-    await slots[0].click()
-    await sleep(sleepTime)
-    await slots[1].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[1].click()
-    await sleep(sleepTime)
-    await slots[2].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[2].click()
-    await sleep(sleepTime)
-    await slots[3].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[2].click()
-    await sleep(sleepTime)
-    await slots[3].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[3].click()
-    await sleep(sleepTime)
-    await slots[1].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[3].click()
+    await clickRow(0)
+    await clickRow(1)
+    await clickRow(1)
+    await clickRow(2)
+    await clickRow(2)
+    await clickRow(3)
+    await clickRow(2)
+    await clickRow(3)
+    await clickRow(3)
+    await clickRow(1)
+    await clickRow(3)
     // Game won how do i assert
     await sleep(sleepTime * 4)
   });
@@ -163,32 +131,17 @@ module.exports = function(){
     // clicking slots[1] is putting a coin in column 2
     // loop this shit!!!!
     // DOM need to regrab element.... DOM changed?
-    await slots[6].click()
-    await sleep(sleepTime)
-    await slots[5].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[5].click()
-    await sleep(sleepTime)
-    await slots[4].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[4].click()
-    await sleep(sleepTime)
-    await slots[3].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[4].click()
-    await sleep(sleepTime)
-    await slots[3].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[3].click()
-    await sleep(sleepTime)
-    await slots[1].click()
-    await sleep(sleepTime)
-    slots = await $('.slot')
-    await slots[3].click()
+    await clickRow(6)
+    await clickRow(5)
+    await clickRow(5)
+    await clickRow(4)
+    await clickRow(4)
+    await clickRow(3)
+    await clickRow(4)
+    await clickRow(3)
+    await clickRow(3)
+    await clickRow(1)
+    await clickRow(3)
     // Game won how do i assert
     await sleep(sleepTime * 4)
   });
