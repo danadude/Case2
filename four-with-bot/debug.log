@@ -37,3 +37,5 @@
 [0502/145657.730:ERROR:process_reader_win.cc(151)] SuspendThread: Åtkomst nekad. (0x5)
 [0502/145657.730:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
 [0502/145657.730:ERROR:exception_snapshot_win.cc(98)] thread ID 7012 not found in process
+[0502/180053.680:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
+[0502/180053.690:ERROR:exception_snapshot_win.cc(98)] thread ID 8448 not found in process
