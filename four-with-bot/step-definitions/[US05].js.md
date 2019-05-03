@@ -5,11 +5,12 @@ let { $, sleep, clickRow } = require('./funcs');
 
 let sleepTime = 500;
 
+let spelare1 = 'Anders_Bot'
+let spelare2 = 'Bo_Human'
+
 module.exports = function () {
 
-  this.Given(/^that I goto the game page$/, async function () {
-    await helpers.loadPage('http://localhost:3000/game');
-  });
+  
 
   this.When(/^I choose to play as a human player vs\. a normal bot$/, async function () {
     let typeChoiceButton = await $('.type-choice-btn');
@@ -38,6 +39,23 @@ module.exports = function () {
     await sleep(sleepTime * 2);
 
   });
+
+  this.When(/^I enter two different names$/, async function () {
+    let inputFields = await $('input[placeholder="Namn (2-10 tecken)"]');
+    await inputFields[0].sendKeys(spelare1);
+    await sleep(sleepTime);
+    await inputFields[1].sendKeys(spelare2);
+    await sleep(sleepTime * 2);
+  });
+
+  this.When(/^I press the Börja spela\-button$/, async function () {
+    let beginButton = await $('body > div > main > div > div:nth-child(5) > button.begin-btn.btn.btn-primary.float-right');
+    await beginButton.click();
+    await sleep (sleepTime * 2);
+  });
+
+
+  
 
 
 }
