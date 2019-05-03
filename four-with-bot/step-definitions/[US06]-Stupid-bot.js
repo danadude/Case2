@@ -1,6 +1,8 @@
 let { $, sleep, clickRow } = require('./funcs');
 
 let sleepTime = 500;
+let spelare1 = 'Normal bot'
+let spelare2 = 'Dumb bot'
 
 module.exports = function () {
 
