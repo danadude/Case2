@@ -1,3 +1,6 @@
+// [US02] As a user I want the application to pronounce a winner when 4 is connected, so that the winner can celebrate
+// Christoffer
+
 let { $, sleep } = require('./funcs')
 
 module.exports = function () {

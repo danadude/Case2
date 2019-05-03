@@ -1,15 +1,9 @@
 // [US05] As a user I want the normal bot to have some randomness in its game choices, so that I can improve my own game
 // Tomas
 
-let { $, sleep } = require('./funcs');
+let { $, sleep, clickRow } = require('./funcs');
 
 let sleepTime = 500;
-
-async function klick(row) {
-  slots = await $('.slot'),
-    await slots[row].click(),
-    await sleep(sleepTime / 2)
-}
 
 module.exports = function () {
 

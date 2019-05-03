@@ -1,3 +1,6 @@
+// [US06] As a user I want the dumb bot to play worse than the normal bot
+// David
+
 let {$, sleep} = require('./funcs');
  
 let sleepTime = 500;
