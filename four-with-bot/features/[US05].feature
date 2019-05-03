@@ -12,7 +12,7 @@ Feature: Check normal bot randomness
 
   Scenario: Game 1
     When I place my coins in a certain way
-    Then the normal bot should place its coins in a certain way
+    Then the normal bot will place its coins in a certain way
 
   Scenario: Game 2
     When I place my coins the same way as the previous game

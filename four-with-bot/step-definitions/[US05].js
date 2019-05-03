@@ -58,102 +58,77 @@ module.exports = function () {
   });
 
   this.When(/^I place my coins in a certain way$/, async function () {
-    humanMove = await driver.findElement(by.css('h3')).getText()
-    humanMove = humanMove.replace(/\D/g, '')
-    await humanMove
-    console.log(humanMove)
-    
-    if (humanMove === '1'){
-      await clickRow(3)
-      await sleep(sleepTime *4)
+    gameSeq = [3, 2, 4, 3]
+    for (i = 0; i < gameSeq.length; i++) {
+      await clickRow(gameSeq[i])
+      await sleep(sleepTime * 4)
     }
-
-    humanMove = await driver.findElement(by.css('h3')).getText()
-    humanMove = humanMove.replace(/\D/g, '')
-    await humanMove
-    console.log(humanMove)
-    
-    if (humanMove === '2'){
-      await clickRow(2)
-      await sleep(sleepTime *4)
-    }
-  
-    humanMove = await driver.findElement(by.css('h3')).getText()
-    humanMove = humanMove.replace(/\D/g, '')
-    await humanMove
-    console.log(humanMove)
-    
-    if (humanMove === '3'){
-      await clickRow(4)
-      await sleep(sleepTime *4)
-    }
-
-    humanMove = await driver.findElement(by.css('h3')).getText()
-    humanMove = humanMove.replace(/\D/g, '')
-    await humanMove
-    console.log(humanMove)
-    
-    if (humanMove === '4'){
-      await clickRow(3)
-      await sleep(sleepTime *4)
-    }
-    
-
 
   });
 
+  this.Then(/^the normal bot will place its coins in a certain way$/, async function () {
 
 
-  this.Then(/^the normal bot should place its coins in a certain way$/, async function () {
 
   });
 
   this.When(/^I place my coins the same way as the previous game$/, async function () {
-    humanMove = await driver.findElement(by.css('h3')).getText()
-    humanMove = humanMove.replace(/\D/g, '')
-    await humanMove
-    console.log(humanMove)
-    
-    if (humanMove === '1'){
-      await clickRow(3)
-      await sleep(sleepTime *4)
+    gameSeq = [3, 2, 4, 3]
+    for (i = 0; i < gameSeq.length; i++) {
+      await clickRow(gameSeq[i])
+      await sleep(sleepTime * 4)
     }
 
-    humanMove = await driver.findElement(by.css('h3')).getText()
-    humanMove = humanMove.replace(/\D/g, '')
-    await humanMove
-    console.log(humanMove)
-    
-    if (humanMove === '2'){
-      await clickRow(2)
-      await sleep(sleepTime *4)
-    }
-  
-    humanMove = await driver.findElement(by.css('h3')).getText()
-    humanMove = humanMove.replace(/\D/g, '')
-    await humanMove
-    console.log(humanMove)
-    
-    if (humanMove === '3'){
-      await clickRow(4)
-      await sleep(sleepTime *4)
-    }
-
-    humanMove = await driver.findElement(by.css('h3')).getText()
-    humanMove = humanMove.replace(/\D/g, '')
-    await humanMove
-    console.log(humanMove)
-    
-    if (humanMove === '4'){
-      await clickRow(3)
-      await sleep(sleepTime *4)
-    }
   });
- 
+
   this.Then(/^the normal bot should vary his game choice$/, async function () {
 
+
+
+
   });
 
 
 
+  
 }
+
+/*
+
+        humanMove = await driver.findElement(by.css('h3')).getText()
+        humanMove = humanMove.replace(/\D/g, '') /1
+        await humanMove
+
+        if (humanMove === 1){
+          await clickRow(3)
+          await sleep(sleepTime *4)
+        }
+
+        humanMove = await driver.findElement(by.css('h3')).getText()
+        humanMove = humanMove.replace(/\D/g, '') /1
+        await humanMove
+
+        if (humanMove === 2){
+          await clickRow(2)
+          await sleep(sleepTime *4)
+        }
+
+        humanMove = await driver.findElement(by.css('h3')).getText()
+        humanMove = humanMove.replace(/\D/g, '') /1
+        await humanMove
+
+        if (humanMove === 3){
+          await clickRow(4)
+          await sleep(sleepTime *4)
+        }
+
+        humanMove = await driver.findElement(by.css('h3')).getText()
+        humanMove = humanMove.replace(/\D/g, '') /1
+        await humanMove
+
+        if (humanMove === 4){
+          await clickRow(3)
+          await sleep(sleepTime *4)
+        }
+
+    */
