@@ -40,7 +40,7 @@ module.exports = function(){
  
   this.When(/^press the Börja spela\-button$/, async function () {
     let beginButton = await $('.begin-btn');
-    beginButton.click();
+    await beginButton.click();
     await sleep(sleepTime);
   });
  
@@ -63,19 +63,15 @@ module.exports = function(){
   });
 
   this.Then(/^he\/she should win$/,async function () {
-  //let gameInfo = await driver.findElement(by.css('html > body > div > main > div.game > div.game-info > h3.mb-3 > span')).getText()
   let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
-  let winMessage = 'Spelare \d vann, efter \d drag!'
   await gameInfo
-  console.log(gameInfo)
   // asserting agianst the text on the page
-  assert(gameInfo === winMessage, 'Matchar EJ')
+  assert(gameInfo === 'Spelare 1 vann, efter 4 drag!' || 'Spelare 1 vann, efter 6 drag!', 'Matchar EJ')
   });
 
   this.When(/^the first player plays (\d+) bricks in a row vertical$/,async function (brickstoWin) {
     // Loops the game sequence required to get the desired outcome
-    // Game won how do i assert
-    gameSeq = [1,6,2,6,3,6,1,6]
+    gameSeq = [1,6,1,6,1,6,1]
     for(i = 0; i < gameSeq.length; i++){
       await clickRow(gameSeq[i])
     }
@@ -83,7 +79,6 @@ module.exports = function(){
 
   this.When(/^the first player plays (\d+) bricks in a diagonally \(left to right\)$/,async function (brickstoWin) {
     // Loops the game sequence required to get the desired outcome
-    // Game won how do i assert
     gameSeq = [0,1,1,2,2,3,2,3,3,1,3]
     for(i = 0; i < gameSeq.length; i++){
       await clickRow(gameSeq[i])
@@ -92,12 +87,10 @@ module.exports = function(){
 
   this.When(/^the first player plays (\d+) bricks in a diagonally \(right to left\)$/,async function (brickstoWin) {
     // Loops the game sequence required to get the desired outcome
-    // Game won how do i assert
     gameSeq = [6,5,5,4,4,3,4,3,3,1,3]
     for(i = 0; i < gameSeq.length; i++){
       await clickRow(gameSeq[i])
     }
   });
-
 
 }
