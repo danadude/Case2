@@ -29,7 +29,6 @@ module.exports = function(){
       }
       await sleep(sleepTime * 2);
     }
-  });
 
  });
 
@@ -48,6 +47,8 @@ module.exports = function(){
         }
       }
       await sleep(sleepTime * 2);
+    }
+    });
 
   this.When(/^with two different names$/, async function () {
     let inputFields = await $('input[placeholder="Namn (2-10 tecken)"]');
@@ -84,7 +85,8 @@ module.exports = function(){
     await sleep(sleepTime * 10);
  
     // MORE TO WRITE HERE!
- 
+  
   });
  
+
 }
