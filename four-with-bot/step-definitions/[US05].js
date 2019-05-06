@@ -11,10 +11,15 @@ let i
 let spelare1 = 'Anders_Bot'
 let spelare2 = 'Bosse'
 
+let gameOutcome1
+let gameOutcome2
+let gameOutcome3
+
+
 module.exports = function () {
 
 
-
+  // Click on drop down menu and choose 'Bot'
   this.When(/^I choose to play as a human player vs\. a normal bot$/, async function () {
     let typeChoiceButton = await $('.type-choice-btn');
     await typeChoiceButton[0].click();
@@ -28,6 +33,7 @@ module.exports = function () {
         break;
       }
     }
+    // Click on drop down menu and choose 'Människa'
     await typeChoiceButton[1].click();
     choices = await $('.dropdown-menu.type-choice.show .dropdown-item');
     for (let choice of choices) {
@@ -42,7 +48,7 @@ module.exports = function () {
     await sleep(sleepTime * 2);
 
   });
-
+  // Input spelare1 to first name field, and input spelare2 to second name field
   this.When(/^I enter two different names$/, async function () {
     let inputFields = await $('input[placeholder="Namn (2-10 tecken)"]');
     await inputFields[0].sendKeys(spelare1);
@@ -50,13 +56,14 @@ module.exports = function () {
     await inputFields[1].sendKeys(spelare2);
     await sleep(sleepTime * 2);
   });
-
+  // Click the begin button
   this.When(/^I press the Börja spela\-button$/, async function () {
     let beginButton = await $('button.begin-btn.btn.btn-primary.float-right');
     await beginButton.click();
     await sleep(sleepTime * 2);
   });
-
+  // Array gameSeq for Human game choice
+  // Await sleep so  is required for waiting on the coins to fall down
   this.When(/^I place my coins in a certain way$/, async function () {
     gameSeq = [3, 2, 4, 3]
     for (i = 0; i < gameSeq.length; i++) {
@@ -67,12 +74,20 @@ module.exports = function () {
   });
 
   this.Then(/^the normal bot will place its coins in a certain way$/, async function () {
+    // This goes simultaneously as previous step
+    // Fetching game outcome and saving it into "gameOutcome1"
 
-
+    let gameOutcome1
+    gameOutcome1 = await $('.slot')
+    let l = gameOutcome1
+    console.log(l)
 
   });
 
+  // Array gameSeq for Human game choice, (should be the same as above) 
+  // Await sleep so  is required for waiting on the coins to fall down
   this.When(/^I place my coins the same way as the previous game$/, async function () {
+
     gameSeq = [3, 2, 4, 3]
     for (i = 0; i < gameSeq.length; i++) {
       await clickRow(gameSeq[i])
@@ -81,54 +96,88 @@ module.exports = function () {
 
   });
 
-  this.Then(/^the normal bot should vary his game choice$/, async function () {
+  this.Then(/^the normal bot should vary his game choice$/, async function (arg1) {
+    // This goes simultaneously as previous step
+    // Fetching game outcome and saving it into "gameOutcome2"
 
+    /*
+    let gameOutcome2
+    gameOutcome2 = await $('.slot')
+    let m=gameOutcome2
+    console.log(m)
+    */
 
+    /*
+    let arrayOfgameOutcome2
+    arrayOfgameOutcome2 = $('body > div > main > div > div.board.clearfix.shown').map(function () {
+      return this.className;
+    }).get();
 
+    $("#output").text(arrayOfgameOutcome2);
+
+    console.log(arrayOfgameOutcome2)
+
+    assert(gameOutcome1 !== gameOutcome2, 'gameOutcome1 should not be equal to gameOutcome2, but it')
+    */
 
   });
 
 
 
-  
+
 }
 
 /*
+gameOutcome1 = await $('body > div > main > div > div.board.clearfix.shown > div:nth-child(37)').getText();
+await gameOutcome1
+//console.log('hej' + gameOutcome1[0])
+console.log('hej1' + gameOutcome1)
 
-        humanMove = await driver.findElement(by.css('h3')).getText()
-        humanMove = humanMove.replace(/\D/g, '') /1
-        await humanMove
+gameOutcome2 = await driver.findElement(by.css('body > div > main > div > div.board.clearfix.shown > div:nth-child(37)')).getText();
+await gameOutcome2
+//console.log('hej' + gameOutcome2[0])
+console.log('hej1' + gameOutcome2[0])
 
-        if (humanMove === 1){
-          await clickRow(3)
-          await sleep(sleepTime *4)
-        }
+let gameOutcome2
+gameOutcome2 = await driver.findElement(by.css('h3')).getText()
+gameOutcome2 = gameOutcome2.replace(/\D/g, '') / 1
+await gameOutcome2
+if (gameOutcome2 === gameOutcome1) { }
 
-        humanMove = await driver.findElement(by.css('h3')).getText()
-        humanMove = humanMove.replace(/\D/g, '') /1
-        await humanMove
+humanMove = await driver.findElement(by.css('h3')).getText()
+humanMove = humanMove.replace(/\D/g, '') / 1
+await humanMove
 
-        if (humanMove === 2){
-          await clickRow(2)
-          await sleep(sleepTime *4)
-        }
+if (humanMove === 1) {
+  await clickRow(3)
+  await sleep(sleepTime * 4)
+}
 
-        humanMove = await driver.findElement(by.css('h3')).getText()
-        humanMove = humanMove.replace(/\D/g, '') /1
-        await humanMove
+humanMove = await driver.findElement(by.css('h3')).getText()
+humanMove = humanMove.replace(/\D/g, '') / 1
+await humanMove
 
-        if (humanMove === 3){
-          await clickRow(4)
-          await sleep(sleepTime *4)
-        }
+if (humanMove === 2) {
+  await clickRow(2)
+  await sleep(sleepTime * 4)
+}
 
-        humanMove = await driver.findElement(by.css('h3')).getText()
-        humanMove = humanMove.replace(/\D/g, '') /1
-        await humanMove
+humanMove = await driver.findElement(by.css('h3')).getText()
+humanMove = humanMove.replace(/\D/g, '') / 1
+await humanMove
 
-        if (humanMove === 4){
-          await clickRow(3)
-          await sleep(sleepTime *4)
-        }
+if (humanMove === 3) {
+  await clickRow(4)
+  await sleep(sleepTime * 4)
+}
+
+humanMove = await driver.findElement(by.css('h3')).getText()
+humanMove = humanMove.replace(/\D/g, '') / 1
+await humanMove
+
+if (humanMove === 4) {
+  await clickRow(3)
+  await sleep(sleepTime * 4)
+}
 
     */

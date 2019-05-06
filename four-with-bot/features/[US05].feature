@@ -14,9 +14,9 @@ Feature: Check normal bot randomness
     When I place my coins in a certain way
     Then the normal bot will place its coins in a certain way
 
-  Scenario: Game 2
-    When I place my coins the same way as the previous game
-    Then the normal bot should vary his game choice
+   Scenario: Game 2
+     When I place my coins the same way as the previous game
+     Then the normal bot should vary his game choice
 
 
 
