@@ -3,12 +3,12 @@
 
 Feature: As a user I want the application to pronounce a winner when 4 is connected, so that the winner can celebrate
 
-Background: 
-    Given that http://localhost:3000/game loaded properly
-    And that player 1 is a human
-    And that player 2 is a human
-    When the play game button is pressed
-    Then the game starts
+Background:
+  Given that I goto the game page
+  When I choose to play as two human players
+  And with two different names
+  And press the Börja spela-button
+  Then the game should start
 
 Scenario: Horizontal win
   When the first player plays 4 bricks in a row horizontally

@@ -42,9 +42,15 @@ module.exports = function () {
         // and erases the old menu.. (tricky...)
         break;
       }
+<<<<<<< HEAD
     }
     await sleep(sleepTime * 2);
   });
+=======
+      await sleep(sleepTime * 2);
+    }
+    });
+>>>>>>> bf81c80ff4c15f62e150bdae4ac49b62f22ee1ff
 
   this.When(/^with two different names$/, async function () {
     let inputFields = await $('input[placeholder="Namn (2-10 tecken)"]');
@@ -67,6 +73,7 @@ module.exports = function () {
     assert.equal(text, 'Avbryt spelet', 'The game did not start!');
     await sleep(sleepTime * 2);
   });
+<<<<<<< HEAD
   // Scenario: Game
 
   this.Then(/^they should play (\d+) games against each other$/, async function (brickstoWin) {
@@ -84,3 +91,24 @@ module.exports = function () {
 
 
 }
+=======
+ 
+  // Scenarios
+ 
+  this.When(/^the first player plays (\d+) bricks in a row horizontally$/, async function (brickstoWin) {
+ 
+    // NOTE: Only began this code, by playing one brick
+    let slots = await $('.slot'); 
+    // clicking slots[0] is putting a coin in column 1
+    // clicking slots[1] is putting a coin in column 2
+    await slots[3].click();
+ 
+    await sleep(sleepTime * 10);
+ 
+    // MORE TO WRITE HERE!
+  
+  });
+ 
+
+}
+>>>>>>> bf81c80ff4c15f62e150bdae4ac49b62f22ee1ff
