@@ -31,5 +31,10 @@ Scenario: Congratulating the winner
     Then that player should win
     And A message that congratulates the winner should be shown
 
+Scenario: Announcing a draw
+    When the board is full
+    And no winner can be declared
+    Then a draw should be announced
+
 
 
