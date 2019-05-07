@@ -13,10 +13,17 @@ Feature: Check normal bot randomness
   Scenario: Game 1
     When I place my coins in a certain way
     Then the normal bot will place its coins in a certain way
+    Then take screen shot on Game outcome
 
-   Scenario: Game 2
-     When I place my coins the same way as the previous game
-     Then the normal bot should vary his game choice
+  Scenario: Game 2
+    When I place my coins the same way as the previous game
+    Then the normal bot should vary his game choice
+    Then take screen shot on Game outcome
+
+  Scenario: Game 3
+    When I place my coins the same way as the previous game
+    Then the normal bot should vary his game choice
+    Then take screen shot on Game outcome
 
 
 
