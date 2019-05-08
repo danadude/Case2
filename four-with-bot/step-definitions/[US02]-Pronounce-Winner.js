@@ -51,12 +51,12 @@ module.exports = function () {
 
     this.Then(/^a draw should be announced$/, async function () {
         
-        //Detta scenario testar mat [US04] As a user I want the application to tell me when it is a draw.
+        //Detta scenario testar [US04] As a user I want the application to tell me when it is a draw.
 
         let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
         await gameInfo
         // asserting against the text on the page
-        assert(gameInfo === 'Det blev oavgjort!', 'FEL')
+        assert(gameInfo.includes('Det blev oavgjort!'), 'FEL')
 
       });
 
