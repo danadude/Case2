@@ -37,7 +37,7 @@ Scenario: Announcing a draw
   Then a draw should be announced
 
 Scenario: Announcing a loss
-  When one player has won
+  When one player has placed 4 bricks in row
   Then the losing player should be informed off the loss
 
 

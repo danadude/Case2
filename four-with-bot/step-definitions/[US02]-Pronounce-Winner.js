@@ -24,7 +24,7 @@ module.exports = function () {
         let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
         await gameInfo
         // asserting against the text on the page
-        assert(gameInfo === 'Spelare 1 vann, efter 4 drag!' || 'Spelare 1 vann, efter 6 drag!', 'FEL')
+        assert(gameInfo === 'Spelare 1 vann, efter 4 drag!', 'FEL')
 
       });
 
@@ -53,26 +53,20 @@ module.exports = function () {
         
         //Detta scenario testar [US04] As a user I want the application to tell me when it is a draw.
 
-        let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
+        let gameInfo = await driver.findElement(by.css('h3')).getText()
         await gameInfo
         // asserting against the text on the page
         assert(gameInfo.includes('Det blev oavgjort!'), 'FEL')
 
       });
 
-      this.When(/^one player has won$/, async function () {
-      
+
+      this.When(/^one player has placed (\d+) bricks in row$/, async function (arg1) {
         // Loops the game sequence to let the first player who place a brick win
         gameSeq = [1,6,2,6,3,6,4]
         for(i = 0; i < gameSeq.length; i++){
           await clickRow(gameSeq[i])
         }
-        
-        let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
-        await gameInfo
-        // asserting agianst the text on the page
-        assert(gameInfo === 'Spelare 1 vann, efter 4 drag!' || 'Spelare 1 vann, efter 6 drag!', 'Matchar EJ')
-
       });
 
       this.Then(/^the losing player should be informed off the loss$/, async function () {
@@ -80,11 +74,12 @@ module.exports = function () {
         //This test is checking user story [US03] As a user I want the application to tell me when i lost.
         //It will (or should) fail due to the functionality not existing in the program.
 
-        let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
+        let gameInfo = await driver.findElement(by.css('h3')).getText()
         await gameInfo
         // asserting agianst the text on the page
-        assert(gameInfo === 'Spelare 2 förlorade, efter 4 drag!' || 'Spelare 2 förlorade, efter 6 drag!', 'Matchar EJ')
+        assert(gameInfo.includes('Spelare 2 förlorade, efter 4 drag!'), 'Matchar EJ')
 
+        console.log(gameInfo)
  
       });
 }
