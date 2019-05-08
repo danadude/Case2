@@ -26,6 +26,7 @@ module.exports = function () {
       let text = await choice.getText()
       if (text === 'Bot') {
         await choice.click()
+        assert(text === 'Bot', '1st choice button is not set to Bot')
         // we MUST break because the dom changes after click
         // and erases the old menu.. (tricky...)
         break
@@ -38,6 +39,7 @@ module.exports = function () {
       text = await choice.getText()
       if (text === 'Människa') {
         await choice.click()
+        assert(text === 'Människa', '2nd choice button is not set to Människa')
         // we MUST break because the dom changes after click
         // and erases the old menu.. (tricky...)
         break
@@ -54,7 +56,7 @@ module.exports = function () {
     await sleep(sleepTime)
     await inputFields[1].sendKeys(spelare2)
     await sleep(sleepTime)
-  })
+    })
 
 
   // Click the begin button
@@ -74,6 +76,10 @@ module.exports = function () {
       await clickRow(gameSeq[i])
       await sleep(sleepTime * 4)
     }
+    let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
+    await gameInfo
+    // asserting agianst the text on the page
+    assert(gameInfo === spelare1 + ' vann, efter 4 drag!', spelare1 + 'should have won after 4 moves')
   })
 
 
@@ -100,6 +106,10 @@ module.exports = function () {
       await clickRow(gameSeq[i])
       await sleep(sleepTime * 4)
     }
+    let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
+    await gameInfo
+    // asserting agianst the text on the page
+    assert(gameInfo === spelare1 + ' vann, efter 4 drag!', spelare1 + 'should have won after 4 moves')
   })
 
 
