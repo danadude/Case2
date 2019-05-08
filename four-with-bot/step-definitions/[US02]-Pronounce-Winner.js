@@ -60,7 +60,7 @@ module.exports = function () {
 
       });
 
-      this.When(/^one player has won$/, function () {
+      this.When(/^one player has won$/, async function () {
       
         // Loops the game sequence to let the first player who place a brick win
         gameSeq = [1,6,2,6,3,6,4]
@@ -75,7 +75,7 @@ module.exports = function () {
 
       });
 
-      this.Then(/^the losing player should be informed off the loss$/, function () {
+      this.Then(/^the losing player should be informed off the loss$/, async function () {
         
         //This test is checking user story [US03] As a user I want the application to tell me when i lost.
         //It will (or should) fail due to the functionality not existing in the program.
