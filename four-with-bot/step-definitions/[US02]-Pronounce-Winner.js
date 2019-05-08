@@ -50,10 +50,10 @@ module.exports = function () {
 
     this.Then(/^a draw should be announced$/, async function () {
         
-        let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
+        let gameInfo = await driver.findElement(by.css('h3')).getText()
         await gameInfo
         // asserting against the text on the page
-        assert(gameInfo === 'Det blev oavgjort!', 'FEL')
+        assert(gameInfo.includes('Det blev oavgjort!'), 'FEL')
 
       });
 
