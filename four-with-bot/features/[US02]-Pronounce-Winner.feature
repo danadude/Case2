@@ -27,14 +27,17 @@ Scenario: Diagonal win (right to left)
   Then he/she should win
 
 Scenario: Congratulating the winner
-    When a player has played 4 bricks that connect either horizontaly, verticaly or diagonaly
-    Then that player should win
-    And A message that congratulates the winner should be shown
+  When a player has played 4 bricks that connect either horizontaly, verticaly or diagonaly
+  Then that player should win
+  And A message that congratulates the winner should be shown
 
 Scenario: Announcing a draw
-    When the board is full
-    And no winner can be declared
-    Then a draw should be announced
+  When the board is full
+  And no winner can be declared
+  Then a draw should be announced
 
+Scenario: Announcing a loss
+  When one player has won
+  Then the losing player should be informed off the loss
 
 

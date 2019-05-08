@@ -1,4 +1,5 @@
 // [US02] As a user I want the application to pronounce a winner when 4 is connected, so that the winner can celebrate
+// [US03] and [US04] are also incorporated in this test.
 // Christoffer
 
 let { clickRow, $, sleep } = require('./funcs')
@@ -50,6 +51,8 @@ module.exports = function () {
 
     this.Then(/^a draw should be announced$/, async function () {
         
+        //Detta scenario testar mat [US04] As a user I want the application to tell me when it is a draw.
+
         let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
         await gameInfo
         // asserting against the text on the page
@@ -57,4 +60,31 @@ module.exports = function () {
 
       });
 
+      this.When(/^one player has won$/, function () {
+      
+        // Loops the game sequence to let the first player who place a brick win
+        gameSeq = [1,6,2,6,3,6,4]
+        for(i = 0; i < gameSeq.length; i++){
+          await clickRow(gameSeq[i])
+        }
+        
+        let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
+        await gameInfo
+        // asserting agianst the text on the page
+        assert(gameInfo === 'Spelare 1 vann, efter 4 drag!' || 'Spelare 1 vann, efter 6 drag!', 'Matchar EJ')
+
+      });
+
+      this.Then(/^the losing player should be informed off the loss$/, function () {
+        
+        //This test is checking user story [US03] As a user I want the application to tell me when i lost.
+        //It will (or should) fail due to the functionality not existing in the program.
+
+        let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
+        await gameInfo
+        // asserting agianst the text on the page
+        assert(gameInfo === 'Spelare 2 förlorade, efter 4 drag!' || 'Spelare 2 förlorade, efter 6 drag!', 'Matchar EJ')
+
+ 
+      });
 }
