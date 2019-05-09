@@ -19,10 +19,13 @@ module.exports = function() {
   });
 
   this.Then(/^i should have the new avatars$/,async function() {
-    let gameInfo = await driver.findElement(by.css('h3')).getText()
-    await gameInfo
-    let logen = gameInfo.replace('�� ','')
-    console.log(logen)
+    let avatar1 = await driver.findElement(by.css('h3')).getText()
+    clickRow(1)
     await sleep(sleepTime)
+    let avatar2 = await driver.findElement(by.css('h3')).getText()
+    await sleep(500)
+    assert(avatar1 === '👩🏻 Spelare 1, drag 1' && avatar2 === '👨🏼 Spelare 2, drag 1', 'kunde inte jämnföra avatar')
+
+
   });
 };

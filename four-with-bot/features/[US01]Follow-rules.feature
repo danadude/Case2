@@ -8,6 +8,6 @@ Background:
   And press the Börja spela-button
   Then the game should start
  
-Scenario: Horizontal win
+Scenario: Change of turns
   When "player 1" plays a bricks
   Then it should be "player 2" turn
