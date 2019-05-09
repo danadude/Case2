@@ -79,7 +79,7 @@ module.exports = function () {
         // asserting agianst the text on the page
         assert(gameInfo.includes('Spelare 2 förlorade, efter 4 drag!'), 'Matchar EJ')
 
-        console.log(gameInfo)
+      
  
       });
 }
