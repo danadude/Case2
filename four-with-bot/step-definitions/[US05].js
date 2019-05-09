@@ -91,7 +91,7 @@ module.exports = function () {
   // Saving game outcome as a screenshot
   this.Then(/^take screen shot on Game outcome$/, async function () {
     await driver.takeScreenshot().then(function (data) {
-      fs.writeFileSync('./reports/imgGameOutcome' + j + '.png', data, 'base64')
+      fs.writeFileSync('./reports/GameOutcome' + j + '.png', data, 'base64')
     })
     j = j + 1
   })
