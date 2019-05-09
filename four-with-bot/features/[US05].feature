@@ -1,7 +1,7 @@
 # [US05] As a user I want the normal bot to have some randomness in its game choices, so that I can improve my own game
 # Tomas
 
-Feature: Check normal bot randomness
+Feature: Check normal bot randomness vs human
 
   Background: Human vs. normal bot, Game should start
     Given that I goto the game page
@@ -24,7 +24,3 @@ Feature: Check normal bot randomness
     When I place my coins the same way as the previous game
     Then the normal bot should vary his game choice
     Then take screen shot on Game outcome
-
-
-
-# Kör även normal bot vs normal bot?
