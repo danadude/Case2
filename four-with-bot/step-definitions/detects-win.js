@@ -66,7 +66,7 @@ module.exports = function(){
   let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
   await gameInfo
   // asserting agianst the text on the page
-  assert(gameInfo === 'Spelare 1 vann, efter 4 drag!' || 'Spelare 1 vann, efter 6 drag!', 'Matchar EJ')
+  assert(gameInfo.includes('Spelare 1 vann,'), 'Matchar EJ')
   });
 
   this.When(/^the first player plays (\d+) bricks in a row vertical$/,async function (brickstoWin) {

@@ -13,18 +13,6 @@ Background:
 Scenario: Horizontal win
   When the first player plays 4 bricks in a row horizontally
   Then he/she should win
- 
-Scenario: Vertical win
-  When the first player plays 4 bricks in a row vertical
-  Then he/she should win
- 
-Scenario: Diagonal win (left to right)
-  When the first player plays 4 bricks in a diagonally (left to right)
-  Then he/she should win
- 
-Scenario: Diagonal win (right to left)
-  When the first player plays 4 bricks in a diagonally (right to left)
-  Then he/she should win
 
 Scenario: Congratulating the winner
   When a player has played 4 bricks that connect either horizontaly, verticaly or diagonaly
