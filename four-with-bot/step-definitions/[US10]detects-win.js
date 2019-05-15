@@ -62,11 +62,18 @@ module.exports = function(){
     }
   });
 
-  this.Then(/^he\/she should win$/,async function () {
+  this.Then(/^first player should win$/,async function () {
   let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
   await gameInfo
   // asserting agianst the text on the page
   assert(gameInfo.includes('Spelare 1 vann,'), 'Matchar EJ')
+  });
+
+  this.Then(/^second player should win$/, async function () {
+    let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
+    await gameInfo
+    // asserting agianst the text on the page
+    assert(gameInfo.includes('Spelare 2 vann,'), 'Matchar EJ')
   });
 
   this.When(/^the first player plays (\d+) bricks in a row vertical$/,async function (brickstoWin) {
@@ -91,6 +98,36 @@ module.exports = function(){
     for(i = 0; i < gameSeq.length; i++){
       await clickCol(gameSeq[i])
     }
+  });
+
+  this.When(/^the second player plays (\d+) bricks in a row horizontally$/,async function (brickstoWin) {
+    // Loops the game sequence required to get the desired outcome
+    gameSeq = gameSeq = [1,6,2,5,1,4,2,3]
+    for(i = 0; i < gameSeq.length; i++){
+      await clickCol(gameSeq[i])
+    }
+  });
+
+  this.When(/^the second player plays (\d+) bricks in a row vertical$/,async function (brickstoWin) {
+    gameSeq = [1,6,1,6,1,6,2,6]
+    for(i = 0; i < gameSeq.length; i++){
+      await clickCol(gameSeq[i])
+    }
+  });
+
+  this.When(/^the second player plays (\d+) bricks in a diagonally \(left to right\)$/,async function (brickstoWin) {
+    gameSeq = [1,0,2,1,2,2,3,3,3,3]
+    for(i = 0; i < gameSeq.length; i++){
+      await clickCol(gameSeq[i])
+    }
+  });
+
+  this.When(/^the second player plays (\d+) bricks in a diagonally \(right to left\)$/,async function (arg1) {
+    gameSeq = [5,6,4,5,4,4,3,3,3,3]
+    for(i = 0; i < gameSeq.length; i++){
+      await clickCol(gameSeq[i])
+    }
+  
   });
 
 }

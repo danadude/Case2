@@ -10,18 +10,32 @@ Background:
  
 Scenario: Horizontal win
   When the first player plays 4 bricks in a row horizontally
-  Then he/she should win
+  Then first player should win
  
 Scenario: Vertical win
   When the first player plays 4 bricks in a row vertical
-  Then he/she should win
+  Then first player should win
  
 Scenario: Diagonal win (left to right)
   When the first player plays 4 bricks in a diagonally (left to right)
-  Then he/she should win
+  Then first player should win
  
 Scenario: Diagonal win (right to left)
   When the first player plays 4 bricks in a diagonally (right to left)
-  Then he/she should win
+  Then first player should win
 
-  
+  Scenario: Second horizontal win
+  When the second player plays 4 bricks in a row horizontally
+  Then second player should win
+ 
+Scenario: Second vertical win
+  When the second player plays 4 bricks in a row vertical
+  Then second player should win
+ 
+Scenario: Second diagonal win (left to right)
+  When the second player plays 4 bricks in a diagonally (left to right)
+  Then second player should win
+ 
+Scenario: Second diagonal win (right to left)
+  When the second player plays 4 bricks in a diagonally (right to left)
+  Then second player should win
