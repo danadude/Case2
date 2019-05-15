@@ -1,5 +1,7 @@
- async function $ (selector){
-  let elements = await driver.findElements(by.css(selector));
+ // Detta är våran gamla func $
+ 
+ async function $ (selector, chosenDriver = driver){
+  let elements = await chosenDriver.findElements(by.css(selector));
   if(elements.length === 0){
     return null; 
   }
@@ -11,12 +13,13 @@
 
 module.exports.$ = $;
 
+
 function sleep (ms){
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 module.exports.sleep = sleep; 
-  
+
 async function clickCol(row) {
   try{
     let slots = await $('.slot')
@@ -28,3 +31,4 @@ async function clickCol(row) {
 }
 
 module.exports.clickCol = clickCol; 
+
