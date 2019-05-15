@@ -9,5 +9,6 @@ Background:
   Then the game should start
  
 Scenario: Change of turns
-  When "player 1" plays a bricks
-  Then it should be "player 2" turn
+  When player 1 plays a bricks
+  Then it should be player 2 turn
+  And the turn should return to player 1
