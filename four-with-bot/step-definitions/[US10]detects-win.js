@@ -1,4 +1,4 @@
-let {$, sleep, clickRow} = require('./funcs');
+let {$, sleep, clickCol} = require('./funcs');
  
 let sleepTime = 500;
 let gameSeq = []
@@ -58,7 +58,7 @@ module.exports = function(){
     // Loops the game sequence required to get the desired outcome
     gameSeq = [1,6,2,6,3,6,4]
     for(i = 0; i < gameSeq.length; i++){
-      await clickRow(gameSeq[i])
+      await clickCol(gameSeq[i])
     }
   });
 
@@ -73,7 +73,7 @@ module.exports = function(){
     // Loops the game sequence required to get the desired outcome
     gameSeq = [1,6,1,6,1,6,1]
     for(i = 0; i < gameSeq.length; i++){
-      await clickRow(gameSeq[i])
+      await clickCol(gameSeq[i])
     }
   });
 
@@ -81,7 +81,7 @@ module.exports = function(){
     // Loops the game sequence required to get the desired outcome
     gameSeq = [0,1,1,2,2,3,2,3,3,1,3]
     for(i = 0; i < gameSeq.length; i++){
-      await clickRow(gameSeq[i])
+      await clickCol(gameSeq[i])
     }
   });
 
@@ -89,7 +89,7 @@ module.exports = function(){
     // Loops the game sequence required to get the desired outcome
     gameSeq = [6,5,5,4,4,3,4,3,3,1,3]
     for(i = 0; i < gameSeq.length; i++){
-      await clickRow(gameSeq[i])
+      await clickCol(gameSeq[i])
     }
   });
 

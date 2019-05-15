@@ -17,7 +17,7 @@ function sleep (ms){
 
 module.exports.sleep = sleep; 
   
-async function clickRow(row) {
+async function clickCol(row) {
   try{
     let slots = await $('.slot')
     await slots[row].click()
@@ -27,4 +27,4 @@ async function clickRow(row) {
   }
 }
 
-module.exports.clickRow = clickRow; 
+module.exports.clickCol = clickCol; 

@@ -2,7 +2,7 @@
 // [US03] and [US04] are also incorporated in this test.
 // Christoffer
 
-let { clickRow, $, sleep } = require('./funcs')
+let { clickCol, $, sleep } = require('./funcs')
 
 module.exports = function () {
 
@@ -15,7 +15,7 @@ module.exports = function () {
         
         gameSeq = [1,6,1,6,1,6,1]
         for(i = 0; i < gameSeq.length; i++){
-          await clickRow(gameSeq[i])}
+          await clickCol(gameSeq[i])}
 
       });
 
@@ -39,7 +39,7 @@ module.exports = function () {
         
         gameSeq = [0,1,2,3,4,5,6,0,1,2,3,4,5,6,0,1,2,3,4,5,6,1,0,3,2,5,4,0,6,1,2,3,4,5,6,0,1,2,3,4,5,6]
         for(i = 0; i < gameSeq.length; i++){
-        await clickRow(gameSeq[i])}
+        await clickCol(gameSeq[i])}
     
       });
 
@@ -65,7 +65,7 @@ module.exports = function () {
         // Loops the game sequence to let the first player who place a brick win
         gameSeq = [1,6,2,6,3,6,4]
         for(i = 0; i < gameSeq.length; i++){
-          await clickRow(gameSeq[i])
+          await clickCol(gameSeq[i])
         }
       });
 
