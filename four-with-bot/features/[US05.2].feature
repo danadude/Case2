@@ -3,7 +3,7 @@
 
 Feature: Check normal bot randomness vs normal bot
 
-  Background: Human vs. normal bot, Game should start
+  Background: normal vs. normal bot, Game should start
     Given that I goto the game page
     When I choose to play as a normal bot vs. a normal bot
     And I enter two bot names
