@@ -1,9 +1,20 @@
 let { $, sleep } = require('./funcs');
- 
-// Importing a standalone selenium webdriver
-// since the selenium-cucumber-js module
-// sadly only supports one...
 const { Builder } = require('selenium-webdriver');
+
+//Sparar brädet till en array
+async function boardToArray(){
+    let boardArray = [];
+    let slots = await $('.slot'); // 42 slots
+    let count = 0;
+    for(let slot of slots){
+      let cssClass = await slot.getAttribute('class');
+      let color = 'empty';
+      if(cssClass.includes('red')){ color = 'red'; }
+      if(cssClass.includes('yellow')){ color = 'yellow'; }
+      boardArray.push(color);
+    }
+    return boardArray;
+  }
  
 let sleepTime = 500;
  
@@ -32,11 +43,7 @@ module.exports = function () {
   });
  
   let gamesolverDriver;
- 
-  // After having done a small change in funcs.js
-  // so that $ can use any driver - as a second argument
-  // I write my own function $$ that can be used instead of writing
-  // gamesolverDriver.findElements(By.css('selector'));
+
   function $$(cssSelector) {
     return $(cssSelector, gamesolverDriver);
   }
@@ -51,7 +58,12 @@ module.exports = function () {
   this.When(/^I choose to play as human and bot in the gamesolver$/, async function () {
     let player2Button = await $$('#player_2');
     await player2Button.click();
-    await sleep(sleepTime * 5);
+    await sleep(sleepTime * 2);
+  });
+
+  this.When(/^two bots have played until someone wins$/, function () {
+    
+    
   });
  
   // Now we only have to write two different functions (or at least understand)
