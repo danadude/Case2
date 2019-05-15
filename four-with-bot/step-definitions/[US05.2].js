@@ -1,7 +1,7 @@
 // [US05] As a user I want the normal bot to have some randomness in its game choices, so that I can improve my own game
 // Tomas
 
-let { $, sleep, clickRow } = require('./funcs')
+let { $, sleep, clickCol } = require('./funcs')
 
 let sleepTime = 500
 

@@ -1,4 +1,4 @@
-let { $, sleep, clickRow } = require("./funcs");
+let { $, sleep, clickCol } = require("./funcs");
 
 let sleepTime = 500;
 
@@ -20,7 +20,7 @@ module.exports = function() {
 
   this.Then(/^i should have the new avatars$/,async function() {
     let avatar1 = await driver.findElement(by.css('h3')).getText()
-    clickRow(1)
+    clickCol(1)
     await sleep(sleepTime)
     let avatar2 = await driver.findElement(by.css('h3')).getText()
     await sleep(500)

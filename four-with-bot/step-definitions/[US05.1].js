@@ -1,7 +1,7 @@
 // [US05] As a user I want the normal bot to have some randomness in its game choices, so that I can improve my own game
 // Tomas
 
-let { $, sleep, clickRow } = require('./funcs')
+let { $, sleep, clickCol } = require('./funcs')
 
 let sleepTime = 500
 
@@ -73,7 +73,7 @@ module.exports = function () {
     await sleep(sleepTime)
     gameSeq = [3, 2, 4]
     for (i = 0; i < gameSeq.length; i++) {
-      await clickRow(gameSeq[i])
+      await clickCol(gameSeq[i])
       await sleep(sleepTime * 4)
     }
     let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
@@ -103,7 +103,7 @@ module.exports = function () {
     await sleep(sleepTime)
     gameSeq = [3, 2, 4]
     for (i = 0; i < gameSeq.length; i++) {
-      await clickRow(gameSeq[i])
+      await clickCol(gameSeq[i])
       await sleep(sleepTime * 4)
     }
     let gameInfo = await driver.findElement(by.css('h3 > span')).getText()

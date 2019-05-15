@@ -1,4 +1,4 @@
-let { $, sleep, clickRow } = require("./funcs");
+let { $, sleep, clickCol } = require("./funcs");
 
 let sleepTime = 500;
 
@@ -7,7 +7,7 @@ module.exports = function() {
       let gameInfo = await driver.findElement(by.css('h3')).getText()
       await gameInfo
       assert(gameInfo.includes('Spelare 1, drag 1') , 'wrong order!')
-      clickRow(1)
+      clickCol(1)
 
       });
 
