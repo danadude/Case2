@@ -46,7 +46,7 @@ module.exports = function() {
 
   this.Then(
     /^they should play (\d+) games against each other$/,
-    { timeout: 90 * 1000 },
+    { timeout: 120 * 1000 },
     async function(gamesToPlay) {
       do {
         while (true) {
@@ -77,6 +77,7 @@ module.exports = function() {
         }
         gamesPlayed++;
         console.log(gamesPlayed);
+        // Klickar och startar en ny match igen.
         if (gamesPlayed < gamesToPlay) {
           againButton = await $(".again-btn");
           await againButton.click();
@@ -89,7 +90,7 @@ module.exports = function() {
     }
   );
 
-  this.Then(/^the normal bot should win all games$/, async function(arg1) {
+  this.Then(/^the normal bot should win all games$/, async function() {
     assert(spelare2 === gamesPlayed, "Boten förlorade mot idioten!");
   });
 };

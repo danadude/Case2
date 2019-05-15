@@ -11,9 +11,8 @@ Background:
   Then the game should start
 
   Scenario: Game 
-  Then they should play 3 games against each other
+  Then they should play 5 games against each other
   And the normal bot should win all games
- | 3 |
 
   
 
