@@ -13,6 +13,7 @@ Background:
   Scenario: Game 
   Then they should play 3 games against each other
   And the normal bot should win all games
+ | 3 |
 
   
 

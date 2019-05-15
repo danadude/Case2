@@ -4,6 +4,9 @@
 let { $, sleep } = require("./funcs");
 let spelare1 = 0;
 let spelare2 = 0;
+let againButton;
+let beginButton;
+let gamesPlayed = 0;
 let sleepTime = 500;
 
 module.exports = function() {
@@ -45,53 +48,48 @@ module.exports = function() {
     /^they should play (\d+) games against each other$/,
     { timeout: 90 * 1000 },
     async function(gamesToPlay) {
-      let gameInfo = await driver.findElement(by.css("h3")).getText();
       do {
-        await sleep(sleepTime * 2);
-        gameInfo = await driver.findElement(by.css("h3")).getText();
-      } while (!gameInfo.includes("vann"));
-      if (gameInfo.includes("Spelare 2")) {
-        spelare2++;
-      }
-      if (gameInfo.includes("Spelare 1")) {
-        spelare1++;
-      }
-      let againButton = await $(".again-btn");
-      await againButton.click();
-      await sleep(2000);
-      let beginButton = await $(".begin-btn");
-      await beginButton.click();
-      await sleep(sleepTime * 2);
-      do {
-        await sleep(sleepTime * 2);
-        gameInfo = await driver.findElement(by.css("h3")).getText();
-      } while (!gameInfo.includes("vann"));
-      if (gameInfo.includes("Spelare 2")) {
-        spelare2++;
-      }
-      if (gameInfo.includes("Spelare 1")) {
-        spelare1++;
-      }
-      againButton = await $(".again-btn");
-      await againButton.click();
-      await sleep(2000);
-      beginButton = await $(".begin-btn");
-      await beginButton.click();
-      await sleep(sleepTime * 2);
-      do {
-        await sleep(sleepTime * 2);
-        gameInfo = await driver.findElement(by.css("h3")).getText();
-      } while (!gameInfo.includes("vann"));
-      if (gameInfo.includes("Spelare 2")) {
-        spelare2++;
-      }
-      if (gameInfo.includes("Spelare 1")) {
-        spelare1++;
-      }
+        while (true) {
+          let gameInfoH3 = await $(".game-info h3");
+          // if there is no h3 run next iteration of the loop
+          if (gameInfoH3 === null) {
+            continue;
+          }
+          // otherwise check the text in the h3
+          let text;
+          try {
+            text = await gameInfoH3.getText();
+          } catch (e) {
+            // the element probably disappeared from the dom
+            // we go a selenium "stale element" error
+            // just continue the loop
+            continue;
+          }
+          if (text.includes("oavgjort") || text.includes("vann")) {
+            if (text.includes("Spelare 1 vann")) {
+              spelare1++;
+            }
+            if (text.includes("Spelare 2 vann")) {
+              spelare2++;
+            }
+            break;
+          }
+        }
+        gamesPlayed++;
+        console.log(gamesPlayed);
+        if (gamesPlayed < gamesToPlay) {
+          againButton = await $(".again-btn");
+          await againButton.click();
+          await sleep(2000);
+          beginButton = await $(".begin-btn");
+          await beginButton.click();
+          await sleep(sleepTime * 2);
+        }
+      } while (gamesPlayed < gamesToPlay);
     }
   );
 
-  this.Then(/^the normal bot should win all games$/, async function() {
-    assert(spelare2 === 3, "Boten förlorade mot idioten!");
+  this.Then(/^the normal bot should win all games$/, async function(arg1) {
+    assert(spelare2 === gamesPlayed, "Boten förlorade mot idioten!");
   });
 };
