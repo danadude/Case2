@@ -11,5 +11,13 @@ Feature: Check normal bot randomness vs normal bot
     Then the game should start
 
   Scenario: Game 1 - normal bot vs normal bot
-    Then the normal bots will play 3 games against each other
+    Then the normal bots will play a game against each other
+    And take screen shot on bot vs bot Game outcome
+
+  Scenario: Game 2 - normal bot vs normal bot
+    Then the normal bots will play a game against each other
+    And take screen shot on bot vs bot Game outcome
+
+  Scenario: Game 3 - normal bot vs normal bot
+    Then the normal bots will play a game against each other
     And take screen shot on bot vs bot Game outcome
