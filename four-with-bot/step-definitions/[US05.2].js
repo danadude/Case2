@@ -54,22 +54,30 @@ module.exports = function () {
     await sleep(sleepTime)
   })
 
-  this.Then(/^the normal bots will play (\d+) games against each other$/, { timeout: 240 * 1000 }, async function (gamesToPlay) {
-    let gameInfo = await driver.findElement(by.css('h3')).getText()
-
-    do {
-      await sleep(sleepTime * 6)
-      gameInfo = await driver.findElement(by.css('h3')).getText()
+  this.Then(/^the normal bots will play (\d+) games against each other$/, { timeout: 240 * 1000 }, async function (x) {
+    while(true){
+      let gameInfoH3 = await $('.game-info h3');
+      // if there is no h3 run next iteration of the loop
+      if(gameInfoH3 === null){ continue; }
+      // otherwise check the text in the h3
+      let text;
+      try {
+        text = await gameInfoH3.getText();
+      }
+      catch(e){
+        // the element probably disappeared from the dom
+        // we go a selenium "stale element" error
+        // just continue the loop
+        continue;
+      }
+      if(text.includes('oavgjort') || text.includes('vann')){
+        // stop the loop if the game is over
+        break;
+      }
+      // wait a short while between checks (otherwise the cpi is overloaded)
+      await sleep(200);
     }
-    while (!gameInfo.includes('!'))
 
-    if (gameInfo.includes('Spelare 2')) {
-      spelare2++
-    }
-
-    if (gameInfo.includes('Spelare 1')) {
-      spelare1++
-    }
 
     // Saving game outcome as a screenshot
     await driver.takeScreenshot().then(function (data) {
@@ -88,7 +96,7 @@ module.exports = function () {
 
     do {
       await sleep(sleepTime * 6)
-      gameInfo = await driver.findElement(by.css('h3')).getText()
+      gameInfo = await driver.findElement(by.css('.game-info h3')).getText()
     }
     while (!gameInfo.includes('!'))
 
@@ -117,7 +125,7 @@ module.exports = function () {
 
     do {
       await sleep(sleepTime * 6)
-      gameInfo = await driver.findElement(by.css('h3')).getText()
+      gameInfo = await driver.findElement(by.css('.game-info h3')).getText()
     }
     while (!gameInfo.includes('!'))
 
