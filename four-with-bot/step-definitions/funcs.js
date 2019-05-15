@@ -1,7 +1,7 @@
  // Detta är våran gamla func $
  
  async function $ (selector, chosenDriver = driver){
-  let elements = await driver.findElements(by.css(selector));
+  let elements = await chosenDriver.findElements(by.css(selector));
   if(elements.length === 0){
     return null; 
   }
