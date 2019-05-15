@@ -65,6 +65,11 @@ module.exports = function () {
     
     
   });
+
+  this.Then(/^the gamesolver bot should always win$/, function (callback) {
+    // Write code here that turns the phrase above into concrete actions
+    callback(null, 'pending');
+  });
  
   // Now we only have to write two different functions (or at least understand)
   // how to dectect which column that was played as the latest move in
