@@ -11,10 +11,6 @@ module.exports = function () {
  
   // Background
  
-  this.Given(/^that I goto the game page$/, async function () {
-    await helpers.loadPage('https://localhost:3000/game');
-  });
- 
   this.When(/^I choose to play as a bot and a human$/, async function () {
     let typeChoiceButtons = await $('.type-choice-btn');
     let choiceArray = ['Bot', 'Människa'];
@@ -33,28 +29,6 @@ module.exports = function () {
       }
       await sleep(sleepTime * 2);
     }
-  });
- 
-  this.When(/^with two different names$/, async function () {
-    let inputFields = await $('input[placeholder="Namn (2-10 tecken)"]');
-    await inputFields[0].sendKeys('Our bot');
-    await sleep(sleepTime * 2);
-    await inputFields[1].sendKeys('Ms Perfect');
-    await sleep(sleepTime * 2);
-  });
- 
-  this.When(/^press the Börja spela\-button$/, async function () {
-    let beginButton = await $('.begin-btn');
-    beginButton.click();
-    await sleep(sleepTime * 2);
-  });
- 
-  this.Then(/^the game should start$/, async function () {
-    let activeMenuLink = await $('.nav-link.active');
-    let text = await activeMenuLink.getText();
-    await sleep(1000); // small wait needed
-    assert.equal(text, 'Avbryt spelet', 'The game did not start!');
-    await sleep(sleepTime * 2);
   });
  
   let gamesolverDriver;

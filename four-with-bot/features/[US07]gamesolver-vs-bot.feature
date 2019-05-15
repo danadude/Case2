@@ -1,4 +1,4 @@
-Feature: 
+Feature: Gamesolver versus four with bot
 Check that the perfect bot (gamesolver)
 always wins (will work if our bot is not perfect)
  
