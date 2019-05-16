@@ -55,7 +55,7 @@ module.exports = function () {
 
       this.When(/^one player has placed (\d+) bricks in row$/, async function (arg1) {
         // Loops the game sequence to let the first player who place a brick win
-        await playGame("1,6,2,6,3,6,4")
+        await playGame("1626364")
       });
 
       this.Then(/^the losing player should be informed off the loss$/, async function () {
