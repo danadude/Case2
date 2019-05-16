@@ -33,3 +33,10 @@ async function clickCol(row) {
 
 module.exports.clickCol = clickCol; 
 
+async function playGame(clickOrder) {
+  for(let i = 0; i < clickOrder.length; i++){
+    await clickCol(clickOrder[i])
+  }
+}
+
+module.exports.playGame = playGame; 

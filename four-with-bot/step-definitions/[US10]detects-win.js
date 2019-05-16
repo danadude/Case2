@@ -1,11 +1,8 @@
-let {$, sleep, clickCol} = require('./funcs');
+let {$, sleep, clickCol, playGame} = require('./funcs');
  
 let sleepTime = 500;
-let gameSeq = []
-let i
 
 module.exports = function(){
- 
   // Background
  
   this.Given(/^that I goto the game page$/, async function () {
@@ -56,78 +53,51 @@ module.exports = function(){
  
   this.When(/^the first player plays (\d+) bricks in a row horizontally$/, async function (brickstoWin) {
     // Loops the game sequence required to get the desired outcome
-    gameSeq = [1,6,2,6,3,6,4]
-    for(i = 0; i < gameSeq.length; i++){
-      await clickCol(gameSeq[i])
-    }
+    await playGame("1626364")
   });
 
   this.Then(/^first player should win$/,async function () {
-  let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
-  await gameInfo
+  let gameInfo = await driver.findElement(by.css('h3')).getText()
   // asserting agianst the text on the page
   assert(gameInfo.includes('Spelare 1 vann,'), 'Matchar EJ')
   });
 
   this.Then(/^second player should win$/, async function () {
     let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
-    await gameInfo
     // asserting agianst the text on the page
     assert(gameInfo.includes('Spelare 2 vann,'), 'Matchar EJ')
   });
 
   this.When(/^the first player plays (\d+) bricks in a row vertical$/,async function (brickstoWin) {
     // Loops the game sequence required to get the desired outcome
-    gameSeq = [1,6,1,6,1,6,1]
-    for(i = 0; i < gameSeq.length; i++){
-      await clickCol(gameSeq[i])
-    }
+    await playGame("1616161")
   });
 
   this.When(/^the first player plays (\d+) bricks in a diagonally \(left to right\)$/,async function (brickstoWin) {
     // Loops the game sequence required to get the desired outcome
-    gameSeq = [0,1,1,2,2,3,2,3,3,1,3]
-    for(i = 0; i < gameSeq.length; i++){
-      await clickCol(gameSeq[i])
-    }
+    await playGame("01122323313")
   });
 
   this.When(/^the first player plays (\d+) bricks in a diagonally \(right to left\)$/,async function (brickstoWin) {
     // Loops the game sequence required to get the desired outcome
-    gameSeq = [6,5,5,4,4,3,4,3,3,1,3]
-    for(i = 0; i < gameSeq.length; i++){
-      await clickCol(gameSeq[i])
-    }
+    await playGame("65544343313")
   });
 
   this.When(/^the second player plays (\d+) bricks in a row horizontally$/,async function (brickstoWin) {
     // Loops the game sequence required to get the desired outcome
-    gameSeq = gameSeq = [1,6,2,5,1,4,2,3]
-    for(i = 0; i < gameSeq.length; i++){
-      await clickCol(gameSeq[i])
-    }
+    await playGame("16251423")
   });
 
   this.When(/^the second player plays (\d+) bricks in a row vertical$/,async function (brickstoWin) {
-    gameSeq = [1,6,1,6,1,6,2,6]
-    for(i = 0; i < gameSeq.length; i++){
-      await clickCol(gameSeq[i])
-    }
+    await playGame("16161626")
   });
 
   this.When(/^the second player plays (\d+) bricks in a diagonally \(left to right\)$/,async function (brickstoWin) {
-    gameSeq = [1,0,2,1,2,2,3,3,3,3]
-    for(i = 0; i < gameSeq.length; i++){
-      await clickCol(gameSeq[i])
-    }
+    await playGame("1021223333")
   });
 
-  this.When(/^the second player plays (\d+) bricks in a diagonally \(right to left\)$/,async function (arg1) {
-    gameSeq = [5,6,4,5,4,4,3,3,3,3]
-    for(i = 0; i < gameSeq.length; i++){
-      await clickCol(gameSeq[i])
-    }
-  
+  this.When(/^the second player plays (\d+) bricks in a diagonally \(right to left\)$/,async function (brickstoWin) {
+    await playGame("5645443333")
   });
 
 }

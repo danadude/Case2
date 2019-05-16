@@ -2,7 +2,7 @@
 // [US03] and [US04] are also incorporated in this test.
 // Christoffer
 
-let { clickCol, $, sleep } = require('./funcs')
+let { clickCol, $, sleep, playGame } = require('./funcs')
 
 module.exports = function () {
 
@@ -12,11 +12,7 @@ module.exports = function () {
       });
 
     this.When(/^a player has played (\d+) bricks that connect either horizontaly, verticaly or diagonaly$/, async function (brickstoWin) {
-        
-        gameSeq = [1,6,1,6,1,6,1]
-        for(i = 0; i < gameSeq.length; i++){
-          await clickCol(gameSeq[i])}
-
+        await playGame("1616161")
       });
 
     this.Then(/^that player should win$/, async function () {
@@ -36,11 +32,7 @@ module.exports = function () {
       });
 
     this.When(/^the board is full$/, async function () {
-        
-        gameSeq = [0,1,2,3,4,5,6,0,1,2,3,4,5,6,0,1,2,3,4,5,6,1,0,3,2,5,4,0,6,1,2,3,4,5,6,0,1,2,3,4,5,6]
-        for(i = 0; i < gameSeq.length; i++){
-        await clickCol(gameSeq[i])}
-    
+        await playGame("012345601234560123456103254061234560123456")
       });
 
     this.When(/^no winner can be declared$/, function () {
@@ -63,10 +55,7 @@ module.exports = function () {
 
       this.When(/^one player has placed (\d+) bricks in row$/, async function (arg1) {
         // Loops the game sequence to let the first player who place a brick win
-        gameSeq = [1,6,2,6,3,6,4]
-        for(i = 0; i < gameSeq.length; i++){
-          await clickCol(gameSeq[i])
-        }
+        await playGame("1626364")
       });
 
       this.Then(/^the losing player should be informed off the loss$/, async function () {
