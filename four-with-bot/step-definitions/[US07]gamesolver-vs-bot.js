@@ -14,11 +14,12 @@ async function boardToArray(){
       boardArray.push(color);
     }
     return boardArray;
-  }
+}
  
 let sleepTime = 500;
  
 module.exports = function () {
+
  
   // Background
  
@@ -61,8 +62,35 @@ module.exports = function () {
     await sleep(sleepTime * 2);
   });
 
-  this.When(/^two bots have played until someone wins$/, function () {
+  this.When(/^two bots have played until someone wins$/, async function () {
+    //Hela denna är under uppbyggnad. Array med index finns, fungerande klick i gamesolver.
+    //Arrayen behöver spara in indexen som har red som color i variabel och skicka
+    //det till gamesolverDrivern. Och vice versa
+    //Gamesolver spelets brädes nummer speglar inte connect4
+
+    let theBoard = await boardToArray()
+
+    function logArrayElements(element, index, array) {
+        console.log('a[' + index + '] = ' + element)
+    }
+
+    theBoard.forEach(logArrayElements)
+
+    let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(38)'))
+
+    await gamesolverHumanClick.click()
     
+    
+    //rad 1: (9)
+    //rad 2: (15)
+    //rad 3: (21)
+    //rad 4: (27)
+    //rad 5: (34)
+    //rad 6: (40)
+   
+
+
+
     
   });
 
