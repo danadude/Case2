@@ -5,8 +5,8 @@ let { $, sleep, clickCol } = require('./funcs')
 
 let sleepTime = 500
 
-let spelare1 = 0
-let spelare2 = 0
+let spelare1 = 'Anders_Bot'
+let spelare2 = 'Bo_Bot'
 
 let j = 1
 
@@ -48,96 +48,42 @@ module.exports = function () {
   // Input spelare1 to first name field, and input spelare2 to second name field
   this.When(/^I enter two bot names$/, async function () {
     let inputFields = await $('input[placeholder="Namn (2-10 tecken)"]')
-    await inputFields[0].sendKeys('Spelare 1')
+    await inputFields[0].sendKeys(spelare1)
     await sleep(sleepTime)
-    await inputFields[1].sendKeys('Spelare 2')
+    await inputFields[1].sendKeys(spelare2)
     await sleep(sleepTime)
   })
 
-  this.Then(/^the normal bots will play (\d+) games against each other$/, { timeout: 240 * 1000 }, async function (gamesToPlay) {
-    let gameInfo = await driver.findElement(by.css('h3')).getText()
-
-    do {
-      await sleep(sleepTime * 6)
-      gameInfo = await driver.findElement(by.css('h3')).getText()
+  this.Then(/^the normal bots will play a game against each other$/, { timeout: 240 * 1000 }, async function () {
+    while (true) {
+      let gameInfoH3 = await $('.game-info h3')
+      // if there is no h3 run next iteration of the loop
+      if (gameInfoH3 === null) { continue }
+      // otherwise check the text in the h3
+      let text
+      try {
+        text = await gameInfoH3.getText()
+      }
+      catch (e) {
+        // the element probably disappeared from the dom
+        // we go a selenium "stale element" error
+        // just continue the loop
+        continue
+      }
+      if (text.includes('oavgjort') || text.includes('vann')) {
+        // stop the loop if the game is over
+        break
+      }
+      // wait between checks
+      await sleep(200)
     }
-    while (!gameInfo.includes('!'))
-
-    if (gameInfo.includes('Spelare 2')) {
-      spelare2++
-    }
-
-    if (gameInfo.includes('Spelare 1')) {
-      spelare1++
-    }
-
-    // Saving game outcome as a screenshot
-    await driver.takeScreenshot().then(function (data) {
-      fs.writeFileSync('./reports/BotVsBotOutcome' + j + '.png', data, 'base64')
-    })
-    j = j + 1
-
-
-    let againButton = await $('.again-btn');
-    await againButton.click();
-    await sleep(2000)
-
-    let beginButton = await $('.begin-btn');
-    await beginButton.click();
-    await sleep(sleepTime * 2);
-
-    do {
-      await sleep(sleepTime * 6)
-      gameInfo = await driver.findElement(by.css('h3')).getText()
-    }
-    while (!gameInfo.includes('!'))
-
-    if (gameInfo.includes('Spelare 2')) {
-      spelare2++
-    }
-
-    if (gameInfo.includes('Spelare 1')) {
-      spelare1++
-    }
-
-    // Saving game outcome as a screenshot
-    await driver.takeScreenshot().then(function (data) {
-      fs.writeFileSync('./reports/BotVsBotOutcome' + j + '.png', data, 'base64')
-    })
-    j = j + 1
-
-
-    againButton = await $('.again-btn');
-    await againButton.click();
-    await sleep(2000)
-
-    beginButton = await $('.begin-btn');
-    await beginButton.click();
-    await sleep(sleepTime * 2);
-
-    do {
-      await sleep(sleepTime * 6)
-      gameInfo = await driver.findElement(by.css('h3')).getText()
-    }
-    while (!gameInfo.includes('!'))
-
-    if (gameInfo.includes('Spelare 2')) {
-      spelare2++
-    }
-
-    if (gameInfo.includes('Spelare 1')) {
-      spelare1++
-    }
-
-    // Saving game outcome as a screenshot
-    await driver.takeScreenshot().then(function (data) {
-      fs.writeFileSync('./reports/BotVsBotOutcome' + j + '.png', data, 'base64')
-    })
-    j = j + 1
-
-  });
+  })
 
   this.Then(/^take screen shot on bot vs bot Game outcome$/, async function () {
-    // This is implemented in previous step
+    // Saving game outcome as a screenshot
+    await driver.takeScreenshot().then(function (data) {
+      fs.writeFileSync('./reports/BotVsBotOutcome' + j + '.png', data, 'base64')
+    })
+    j = j + 1
   })
 }

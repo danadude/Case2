@@ -20,6 +20,7 @@ function sleep (ms){
 
 module.exports.sleep = sleep; 
 
+// function for clicking on top of columns. accepted values from [0] to [6]
 async function clickCol(row) {
   try{
     let slots = await $('.slot')
@@ -32,3 +33,10 @@ async function clickCol(row) {
 
 module.exports.clickCol = clickCol; 
 
+async function playGame(clickOrder) {
+  for(let i = 0; i < clickOrder.length; i++){
+    await clickCol(clickOrder[i])
+  }
+}
+
+module.exports.playGame = playGame; 
