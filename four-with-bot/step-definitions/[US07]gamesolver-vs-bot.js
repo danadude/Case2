@@ -76,17 +76,89 @@ module.exports = function () {
 
     theBoard.forEach(logArrayElements)
 
-    let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(38)'))
 
-    await gamesolverHumanClick.click()
+
+   /* function updateNewBoard(theBoard, newArray){
+        if (theBoard.indexOf(newArray) === -1){
+            theBoard.push(newArray)
+            console.log('nya arrayen är ' + newArray)
+        } else if (theBoard.indexOf(newArray) > -1) {
+            console.log(newArray + ' är redan uppdaterad')
+        } 
+        
+    newArray = ['','','','','','','',
+                '','','','','','','',
+                '','','','','','','',
+                '','','','','','','',
+                '','','','','','','',
+                '','','','','','','']
+
+    }
+
+    updateNewBoard(theBoard)
+
+    console.log(newArray) */
+
+    red_brick = await theBoard.indexOf('red')
+
+    console.log(red_brick)
+
+    //function Spela(red_brick, yellow_brick)
+    //logiken fungerar, men kolumn/radläsningen från four-with-bot är inte korrekt än
+
+    if (0 <= red_brick && red_brick <= 5){
+        let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(9)'))
+        await gamesolverHumanClick.click()  
+        
+    }else if (6 <= red_brick && red_brick <= 11){
+        let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(15)'))
+        await gamesolverHumanClick.click()  
+
+    }else if (12 <= red_brick && red_brick <= 17){
+        let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(21)'))
+        await gamesolverHumanClick.click()  
+
+    }else if (18 <= red_brick && red_brick <= 23){
+        let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(27)'))
+        await gamesolverHumanClick.click()  
+
+    }else if (24 <= red_brick && red_brick <= 29){
+        let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(33)'))
+        await gamesolverHumanClick.click()  
+
+    }else if (30 <= red_brick && red_brick <= 35){
+        let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(39)'))
+        await gamesolverHumanClick.click()  
+
+    }else if (36 <= red_brick && red_brick <= 41){
+        let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(45)'))
+        await gamesolverHumanClick.click()  
+
+    }else{
+        alert('helvete')
+
+    }
+
+    console.log(red_brick)
     
     
-    //rad 1: (9)
-    //rad 2: (15)
-    //rad 3: (21)
-    //rad 4: (27)
-    //rad 5: (34)
-    //rad 6: (40)
+    //Gamesolverkolumner
+    //col 1: (9) document.querySelector("#board > div:nth-child(9)") 
+    //col 2: (15) document.querySelector("#board > div:nth-child(15)")
+    //col 3: (21) document.querySelector("#board > div:nth-child(21)") 
+    //col 4: (27) document.querySelector("#board > div:nth-child(27)")
+    //col 5: (33) document.querySelector("#board > div:nth-child(33)")
+    //col 6: (39) document.querySelector("#board > div:nth-child(39)")
+    //col 7: (45) document.querySelector("#board > div:nth-child(45)")
+
+    //från sidkälla
+    //div.col0 {left:0%;}
+    //div.col1 {left:14.285714286%;}
+    //div.col2 {left:28.571428571%;}
+    //div.col3 {left:42.857142857%;}
+    //div.col4 {left:57.142857143%;}
+    //div.col5 {left:71.428571429%;}
+    //div.col6 {left:85.714285714%;}
    
 
 
