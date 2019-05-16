@@ -8,9 +8,27 @@ let sleepTime = 500
 let spelare1 = 'Anders_Bot'
 let spelare2 = 'Bo_Bot'
 
+let i = 1
+/* this is for the screen shot scenario
 let j = 1
 
 let fs = require('fs')
+*/
+
+async function boardToArray(){
+  let gameOutcome = [];
+  let slots = await $('.slot');
+  let count = 0;
+  for(let slot of slots){
+    let cssClass = await slot.getAttribute('class');
+    let color = 'empty';
+    if(cssClass.includes('red')){ color = 'red'; }
+    if(cssClass.includes('yellow')){ color = 'yellow'; }
+    gameOutcome.push(color);
+  }
+  return gameOutcome;
+}
+
 
 module.exports = function () {
 
@@ -79,11 +97,18 @@ module.exports = function () {
     }
   })
 
-  this.Then(/^take screen shot on bot vs bot Game outcome$/, async function () {
-    // Saving game outcome as a screenshot
-    await driver.takeScreenshot().then(function (data) {
-      fs.writeFileSync('./reports/BotVsBotOutcome' + j + '.png', data, 'base64')
-    })
-    j = j + 1
+  this.Then(/^they should not play identically in comparison to previous games$/, async function () {
+    // save board as gameOutcome + number of game>
+    // if it's the first game then the comparison should not be done
+    // otherwise compare the gameOutcome to the previous gameOutcome
+    
   })
 }
+
+/*
+// Saving game outcome as a screenshot
+await driver.takeScreenshot().then(function (data) {
+  fs.writeFileSync('./reports/BotVsBotOutcome' + j + '.png', data, 'base64')
+})
+j = j + 1
+*/
