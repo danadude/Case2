@@ -8,27 +8,23 @@ let sleepTime = 500
 let spelare1 = 'Anders_Bot'
 let spelare2 = 'Bo_Bot'
 
+let gameOutcomeArray = [];
+
 let i = 1
-/* this is for the screen shot scenario
-let j = 1
 
-let fs = require('fs')
-*/
-
-async function boardToArray(){
-  let gameOutcome = [];
+async function boardToArray() {
+  gameOutcomeArray = [];
   let slots = await $('.slot');
   let count = 0;
-  for(let slot of slots){
+  for (let slot of slots) {
     let cssClass = await slot.getAttribute('class');
     let color = 'empty';
-    if(cssClass.includes('red')){ color = 'red'; }
-    if(cssClass.includes('yellow')){ color = 'yellow'; }
-    gameOutcome.push(color);
+    if (cssClass.includes('red')) { color = 'red'; }
+    if (cssClass.includes('yellow')) { color = 'yellow'; }
+    gameOutcomeArray.push(color);
   }
-  return gameOutcome;
+  return gameOutcomeArray;
 }
-
 
 module.exports = function () {
 
@@ -97,18 +93,23 @@ module.exports = function () {
     }
   })
 
-  this.Then(/^they should not play identically in comparison to previous games$/, async function () {
+  this.Then(/^they will place their bricks in a certain way$/, async function () {
     // save board as gameOutcome + number of game>
-    // if it's the first game then the comparison should not be done
-    // otherwise compare the gameOutcome to the previous gameOutcome
-    
-  })
-}
+    let gameOutcome = await boardToArray();
+    console.log(gameOutcome.length)
+    console.log(gameOutcome)
 
-/*
-// Saving game outcome as a screenshot
-await driver.takeScreenshot().then(function (data) {
-  fs.writeFileSync('./reports/BotVsBotOutcome' + j + '.png', data, 'base64')
-})
-j = j + 1
-*/
+  })
+
+  this.Then(/^the normal bots will play a second game against each other$/, function (callback) {
+    // Write code here that turns the phrase above into concrete actions
+    callback(null, 'pending');
+  });
+
+  this.Then(/^they should not play identically in comparison to the first game$/, function (callback) {
+    // Write code here that turns the phrase above into concrete actions
+    callback(null, 'pending');
+  });
+
+  
+}
