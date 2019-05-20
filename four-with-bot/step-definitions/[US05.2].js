@@ -8,9 +8,26 @@ let sleepTime = 500
 let spelare1 = 'Anders_Bot'
 let spelare2 = 'Bo_Bot'
 
-let j = 1
+let gameOutcomeArray = [];
 
-let fs = require('fs')
+let gameOutcome1
+let gameOutcome2
+
+let i = 1
+
+async function boardToArray() {
+  gameOutcomeArray = [];
+  let slots = await $('.slot');
+  let count = 0;
+  for (let slot of slots) {
+    let cssClass = await slot.getAttribute('class');
+    let color = 'empty';
+    if (cssClass.includes('red')) { color = 'red'; }
+    if (cssClass.includes('yellow')) { color = 'yellow'; }
+    gameOutcomeArray.push(color);
+  }
+  return gameOutcomeArray;
+}
 
 module.exports = function () {
 
@@ -79,11 +96,44 @@ module.exports = function () {
     }
   })
 
-  this.Then(/^take screen shot on bot vs bot Game outcome$/, async function () {
-    // Saving game outcome as a screenshot
-    await driver.takeScreenshot().then(function (data) {
-      fs.writeFileSync('./reports/BotVsBotOutcome' + j + '.png', data, 'base64')
-    })
-    j = j + 1
+  this.Then(/^they will place their bricks in a certain way$/, async function () {
+    // save board as gameOutcome1
+    gameOutcome1 = await boardToArray()
+    console.log(gameOutcome1.length)
+    console.log(gameOutcome1)
   })
+
+  this.Then(/^the normal bots will play a second game against each other$/, { timeout: 240 * 1000 }, async function () {
+    while (true) {
+      let gameInfoH3 = await $('.game-info h3')
+      // if there is no h3 run next iteration of the loop
+      if (gameInfoH3 === null) { continue }
+      // otherwise check the text in the h3
+      let text
+      try {
+        text = await gameInfoH3.getText()
+      }
+      catch (e) {
+        // the element probably disappeared from the dom
+        // we go a selenium "stale element" error
+        // just continue the loop
+        continue
+      }
+      if (text.includes('oavgjort') || text.includes('vann')) {
+        // stop the loop if the game is over
+        break
+      }
+      // wait between checks
+      await sleep(200)
+    }
+  })
+
+  this.Then(/^they should not play identically in comparison to the first game$/, async function () {
+    // save board as gameOutcome2
+    gameOutcome2 = await boardToArray()
+    console.log(gameOutcome2.length)
+    console.log(gameOutcome2)
+    assert.notDeepEqual(gameOutcome1, gameOutcome2, "[The two boards are not equal]")
+  })
+
 }
