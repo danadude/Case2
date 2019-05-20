@@ -254,6 +254,7 @@
 [0515/132952.148:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
 [0515/132952.149:ERROR:exception_snapshot_win.cc(98)] thread ID 4104 not found in process
 >>>>>>> ec7ecf0fa4ea92fb2f939514de80b8f182b50c9a
+<<<<<<< HEAD
 [0519/211512.549:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
 [0519/211512.552:ERROR:exception_snapshot_win.cc(98)] thread ID 12284 not found in process
 [0519/211512.676:ERROR:process_reader_win.cc(151)] SuspendThread: Åtkomst nekad. (0x5)
@@ -261,3 +262,13 @@
 [0519/211512.704:ERROR:process_reader_win.cc(151)] SuspendThread: Åtkomst nekad. (0x5)
 [0519/211512.704:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
 [0519/211512.705:ERROR:exception_snapshot_win.cc(98)] thread ID 8604 not found in process
+=======
+[0520/090250.347:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
+[0520/090250.349:ERROR:exception_snapshot_win.cc(98)] thread ID 8104 not found in process
+[0520/091448.348:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
+[0520/091448.349:ERROR:exception_snapshot_win.cc(98)] thread ID 9268 not found in process
+[0520/091731.548:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
+[0520/091731.549:ERROR:exception_snapshot_win.cc(98)] thread ID 688 not found in process
+[0520/091952.904:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
+[0520/091952.907:ERROR:exception_snapshot_win.cc(98)] thread ID 10460 not found in process
+>>>>>>> 9d7c985b4a84b528780593bb950f3ba8fd15b7ec
