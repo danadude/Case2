@@ -1,4 +1,4 @@
-let { $, sleep } = require('./funcs');
+let { $, sleep, clickCol } = require('./funcs');
 const { Builder } = require('selenium-webdriver');
 let gamesolverDriver;
 
@@ -81,26 +81,13 @@ module.exports = function () {
   });
 
   this.When(/^two bots have played until someone wins$/, async function () {
-    //Hela denna är under uppbyggnad. Array med index finns, fungerande klick i gamesolver.
-    //Arrayen behöver spara in indexen som har red som color i variabel och skicka
-    //det till gamesolverDrivern. Och vice versa
-    //Gamesolver spelets brädes nummer speglar inte connect4
-
+    
     let theBoard = await boardToArray()
-
-    function logArrayElements(element, index, array) {
-        console.log('a[' + index + '] = ' + element)
-    }
-
-    theBoard.forEach(logArrayElements)
-
     red_brick = await theBoard.indexOf('red')
     red_brick = red_brick + 15
-    
     console.log(red_brick)
 
-    //function Spela(red_brick, yellow_brick)
-    //logiken fungerar, men kolumn/radläsningen från four-with-bot är inte korrekt än
+
 
     if (red_brick == 15 || red_brick == 22 || 29 == red_brick || red_brick == 36 || red_brick == 15 ){
         let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(9)'))
@@ -135,44 +122,19 @@ module.exports = function () {
 
     }
 
-    /*
-    let theBoard2 = await boardToArray2()
 
-    function logArrayElements2(element, index, array) {
-        console.log('b[' + index + '] = ' + element)
-    }
-
-    theBoard2.forEach(logArrayElements2)
-    */
-    
+    await sleep(sleepTime*2)
     let player2 = await $$('.player2')
     for(let elem of player2){
       let width = await elem.getAttribute('style')
-      console.log(width)
+      if(width.includes('left: 0%')){ clickCol(0); console.log('bajs 1')}
+      if(width.includes('left: 14.2857%')){ clickCol(1); console.log('bajs 2')}
+      if(width.includes('left: 28.5714%')){ clickCol(2); console.log('bajs 3')}
+      if(width.includes('left: 42.8571%')){ clickCol(3); console.log('bajs 4')}
+      if(width.includes('left: 57.1429%')){ clickCol(4); console.log('bajs 5')}
+      if(width.includes('left: 71.4286%')){ clickCol(5); console.log('bajs 6')}
+      if(width.includes('left: 85.7143%')){ clickCol(6); console.log('bajs 7')}
     }
-
-    
-
-    
-    //Gamesolverkolumner
-    //col 1: (9) document.querySelector("#board > div:nth-child(9)") 
-    //col 2: (15) document.querySelector("#board > div:nth-child(15)")
-    //col 3: (21) document.querySelector("#board > div:nth-child(21)") 
-    //col 4: (27) document.querySelector("#board > div:nth-child(27)")
-    //col 5: (33) document.querySelector("#board > div:nth-child(33)")
-    //col 6: (39) document.querySelector("#board > div:nth-child(39)")
-    //col 7: (45) document.querySelector("#board > div:nth-child(45)")
-
-    //från sidkälla
-    //div.col0 {left:0%;}
-    //div.col1 {left:14.285714286%;}
-    //div.col2 {left:28.571428571%;}
-    //div.col3 {left:42.857142857%;}
-    //div.col4 {left:57.142857143%;}
-    //div.col5 {left:71.428571429%;}
-    //div.col6 {left:85.714285714%;}
-   
-  
 
 
     
@@ -183,15 +145,7 @@ module.exports = function () {
     callback(null, 'pending');
   });
  
-  // Now we only have to write two different functions (or at least understand)
-  // how to dectect which column that was played as the latest move in
-  // 1) our app/the prototype
-  // 2) the gamesolver/perfect app
-  //
-  // Then we can start to fake being a human but sending the other bots
-  // move so the two bots can meet automatically
-  //
-  // Then can we test if the perfect bot always win
+
  
  
 }
