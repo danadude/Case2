@@ -22,6 +22,7 @@ async function boardToArray(){
 }
 
 //sparar gamesolverbrädet
+/*
 async function boardToArray2(){
   let boardArray2 = [];
   let slots = await $$('.board'); // 42 slots
@@ -35,7 +36,7 @@ async function boardToArray2(){
   }
   return boardArray2;
 }
-
+*/
  
 let sleepTime = 500;
  
@@ -94,37 +95,38 @@ module.exports = function () {
     theBoard.forEach(logArrayElements)
 
     red_brick = await theBoard.indexOf('red')
+    red_brick = red_brick + 15
     
     console.log(red_brick)
 
     //function Spela(red_brick, yellow_brick)
     //logiken fungerar, men kolumn/radläsningen från four-with-bot är inte korrekt än
 
-    if (0 <= red_brick && red_brick <= 5){
+    if (red_brick == 15 || red_brick == 22 || 29 == red_brick || red_brick == 36 || red_brick == 15 ){
         let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(9)'))
         await gamesolverHumanClick.click()  
         
-    }else if (6 <= red_brick && red_brick <= 11){
+    }else if (16 === red_brick || red_brick === 23 || 30 === red_brick || red_brick === 37 || 44 === red_brick || red_brick === 51){
         let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(15)'))
         await gamesolverHumanClick.click()  
 
-    }else if (12 <= red_brick && red_brick <= 17){
+    }else if (17 === red_brick || red_brick === 24 || 31 === red_brick || red_brick === 38 || 45 === red_brick || red_brick === 52){
         let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(21)'))
         await gamesolverHumanClick.click()  
 
-    }else if (18 <= red_brick && red_brick <= 23){
+    }else if (18 === red_brick || red_brick === 25 || 32 === red_brick || red_brick === 39 || 46 === red_brick || red_brick === 53){
         let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(27)'))
         await gamesolverHumanClick.click()  
 
-    }else if (24 <= red_brick && red_brick <= 29){
+    }else if (19 === red_brick || red_brick === 26 || 33 === red_brick ||red_brick === 40 || 47 === red_brick || red_brick === 54){
         let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(33)'))
         await gamesolverHumanClick.click()  
 
-    }else if (30 <= red_brick && red_brick <= 35){
+    }else if (20 === red_brick || red_brick === 27 || 34 === red_brick || red_brick === 41 || 48 === red_brick || red_brick === 55){
         let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(39)'))
         await gamesolverHumanClick.click()  
 
-    }else if (36 <= red_brick && red_brick <= 41){
+    }else if (21 === red_brick || red_brick === 28 || 35 === red_brick || red_brick === 42 || 49 === red_brick || red_brick === 56){
         let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(45)'))
         await gamesolverHumanClick.click()  
 
@@ -133,6 +135,7 @@ module.exports = function () {
 
     }
 
+    /*
     let theBoard2 = await boardToArray2()
 
     function logArrayElements2(element, index, array) {
@@ -140,7 +143,7 @@ module.exports = function () {
     }
 
     theBoard2.forEach(logArrayElements2)
-
+    */
     
     let player2 = await $$('.player2')
     for(let elem of player2){
