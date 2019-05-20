@@ -133,7 +133,9 @@ module.exports = function () {
     gameOutcome2 = await boardToArray()
     console.log(gameOutcome2.length)
     console.log(gameOutcome2)
-    assert.notDeepEqual(gameOutcome1, gameOutcome2, "[The two boards are not equal]")
+    // assert for comparing game 1 board and game 1 board, 
+    // if they are not equal the test will pass
+    assert.notDeepEqual(gameOutcome1, gameOutcome2, "[The two boards are equal. They should not be equal]")
   })
 
 }
