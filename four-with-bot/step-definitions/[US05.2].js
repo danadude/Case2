@@ -5,8 +5,8 @@ let { $, sleep, clickCol } = require('./funcs')
 
 let sleepTime = 500
 
-let spelare1 = 'Anders_Bot'
-let spelare2 = 'Bo_Bot'
+let spelare1 = 'Spelare 1'
+let spelare2 = 'Spelare 2'
 
 let gameOutcomeArray = [];
 
@@ -99,8 +99,9 @@ module.exports = function () {
   this.Then(/^they will place their bricks in a certain way$/, async function () {
     // save board as gameOutcome1
     gameOutcome1 = await boardToArray()
-    console.log(gameOutcome1.length)
-    console.log(gameOutcome1)
+    // console.log(gameOutcome1.length)
+    // console.log(gameOutcome1)
+    assert(gameOutcome1.length === 42, "gameOutcome1.length should be 42")
   })
 
   this.Then(/^the normal bots will play a second game against each other$/, { timeout: 240 * 1000 }, async function () {
@@ -131,10 +132,11 @@ module.exports = function () {
   this.Then(/^they should not play identically in comparison to the first game$/, async function () {
     // save board as gameOutcome2
     gameOutcome2 = await boardToArray()
-    console.log(gameOutcome2.length)
-    console.log(gameOutcome2)
+    // console.log(gameOutcome2.length)
+    // console.log(gameOutcome2)
     // assert for comparing game 1 board and game 1 board, 
     // if they are not equal the test will pass
+    assert(gameOutcome2.length === 42, "gameOutcome2.length should be 42")
     assert.notDeepEqual(gameOutcome1, gameOutcome2, "[The two boards are equal. They should not be equal]")
   })
 
