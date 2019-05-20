@@ -40,3 +40,18 @@ async function playGame(clickOrder) {
 }
 
 module.exports.playGame = playGame; 
+
+async function boardToArray(){
+  let boardArray = [];
+  let slots = await $('.slot'); // 42 slots
+  for(let slot of slots){
+    let cssClass = await slot.getAttribute('class');
+    let color = 'empty';
+    if(cssClass.includes('red')){ color = 'red'; }
+    if(cssClass.includes('yellow')){ color = 'yellow'; }
+    boardArray.push(color);
+  }
+  return boardArray;
+}
+
+module.exports.boardToArray = boardToArray;
