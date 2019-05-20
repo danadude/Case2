@@ -79,6 +79,6 @@ module.exports = function () {
     assert(gameOutcome2.length === 42, "gameOutcome2.length should be 42")
     // assert for comparing game 1 board and game 1 board, 
     // if they are not equal the test will pass
-    assert.notDeepEqual(gameOutcome1, gameOutcome2, "[The two boards are equal. They should not be equal]")
+    assert.notDeepEqual(gameOutcome1, gameOutcome2, "[The two boards are equal. They should not be equal. Run the test again]")
   })
 }
