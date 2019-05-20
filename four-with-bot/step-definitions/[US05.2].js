@@ -10,6 +10,9 @@ let spelare2 = 'Bo_Bot'
 
 let gameOutcomeArray = [];
 
+let gameOutcome1
+let gameOutcome2
+
 let i = 1
 
 async function boardToArray() {
@@ -95,7 +98,7 @@ module.exports = function () {
 
   this.Then(/^they will place their bricks in a certain way$/, async function () {
     // save board as gameOutcome1
-    let gameOutcome1 = await boardToArray();
+    gameOutcome1 = await boardToArray()
     console.log(gameOutcome1.length)
     console.log(gameOutcome1)
   })
@@ -127,12 +130,10 @@ module.exports = function () {
 
   this.Then(/^they should not play identically in comparison to the first game$/, async function () {
     // save board as gameOutcome2
-    let gameOutcome2 = await boardToArray();
+    gameOutcome2 = await boardToArray()
     console.log(gameOutcome2.length)
     console.log(gameOutcome2)
-
-    assert.deepStrictEqual(gameOutcome1, gameOutcome2, "The two boards are not equal");
+    assert.notDeepEqual(gameOutcome1, gameOutcome2, "[The two boards are not equal]")
   })
-
 
 }
