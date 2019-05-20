@@ -1,19 +1,15 @@
 // [US05] As a user I want the normal bot to have some randomness in its game choices, so that I can improve my own game
 // Tomas
 
-let { $, sleep, playGame, boardToArray } = require('./funcs')
+let { $, sleep, boardToArray } = require('./funcs')
 
 let sleepTime = 500
 
 let spelare1 = 'Spelare 1'
 let spelare2 = 'Spelare 2'
 
-let gameOutcomeArray = [];
-
 let gameOutcome1
 let gameOutcome2
-
-let i = 1
 
 module.exports = function () {
 
