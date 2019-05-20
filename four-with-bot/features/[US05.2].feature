@@ -12,12 +12,8 @@ Feature: Check normal bot randomness vs normal bot
 
   Scenario: Game 1 - normal bot vs normal bot
     Then the normal bots will play a game against each other
-    And they should not play identically in comparison to previous games
+    And they will place their bricks in a certain way
 
   Scenario: Game 2 - normal bot vs normal bot
-    Then the normal bots will play a game against each other
-    And they should not play identically in comparison to previous games
-
-  Scenario: Game 3 - normal bot vs normal bot
-    Then the normal bots will play a game against each other
-    And they should not play identically in comparison to previous games
+    Then the normal bots will play a second game against each other
+    And they should not play identically in comparison to the first game
