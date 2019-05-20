@@ -1,7 +1,12 @@
 let { $, sleep } = require('./funcs');
 const { Builder } = require('selenium-webdriver');
+let gamesolverDriver;
 
-//Sparar brädet till en array
+function $$(cssSelector) {
+  return $(cssSelector, gamesolverDriver);
+}
+
+//Sparar four with bot brädet till en array
 async function boardToArray(){
     let boardArray = [];
     let slots = await $('.slot'); // 42 slots
@@ -15,6 +20,22 @@ async function boardToArray(){
     }
     return boardArray;
 }
+
+//sparar gamesolverbrädet
+async function boardToArray2(){
+  let boardArray2 = [];
+  let slots = await $$('.board'); // 42 slots
+  let count2 = 0;
+  for(let slot of slots){
+    let cssClass = await slot.getAttribute('class');
+    let color = 'empty';
+    if(cssClass.includes('player1')){ color = 'red'; }
+    if(cssClass.includes('player2')){ color = 'yellow'; }
+    boardArray2.push(color);
+  }
+  return boardArray2;
+}
+
  
 let sleepTime = 500;
  
@@ -43,11 +64,7 @@ module.exports = function () {
     }
   });
  
-  let gamesolverDriver;
 
-  function $$(cssSelector) {
-    return $(cssSelector, gamesolverDriver);
-  }
  
   this.Given(/^that we are on the gamesolver page$/, async function () {
     // creating a new driver
@@ -76,31 +93,8 @@ module.exports = function () {
 
     theBoard.forEach(logArrayElements)
 
-
-
-   /* function updateNewBoard(theBoard, newArray){
-        if (theBoard.indexOf(newArray) === -1){
-            theBoard.push(newArray)
-            console.log('nya arrayen är ' + newArray)
-        } else if (theBoard.indexOf(newArray) > -1) {
-            console.log(newArray + ' är redan uppdaterad')
-        } 
-        
-    newArray = ['','','','','','','',
-                '','','','','','','',
-                '','','','','','','',
-                '','','','','','','',
-                '','','','','','','',
-                '','','','','','','']
-
-    }
-
-    updateNewBoard(theBoard)
-
-    console.log(newArray) */
-
     red_brick = await theBoard.indexOf('red')
-
+    
     console.log(red_brick)
 
     //function Spela(red_brick, yellow_brick)
@@ -139,8 +133,23 @@ module.exports = function () {
 
     }
 
-    console.log(red_brick)
+    let theBoard2 = await boardToArray2()
+
+    function logArrayElements2(element, index, array) {
+        console.log('b[' + index + '] = ' + element)
+    }
+
+    theBoard2.forEach(logArrayElements2)
+
     
+    let player2 = await $$('.player2')
+    for(let elem of player2){
+      let width = await elem.getAttribute('style')
+      console.log(width)
+    }
+
+    
+
     
     //Gamesolverkolumner
     //col 1: (9) document.querySelector("#board > div:nth-child(9)") 
@@ -160,7 +169,7 @@ module.exports = function () {
     //div.col5 {left:71.428571429%;}
     //div.col6 {left:85.714285714%;}
    
-
+  
 
 
     
