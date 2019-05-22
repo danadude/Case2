@@ -79,7 +79,7 @@ module.exports = function(){
         console.log(err);
     } else {
     winCounter = JSON.parse(jsonContent); //now it an object
-    winCounter.vinnare.push({id:2, color:1}); //add some data
+    winCounter.vinnare.push({spelare:1, win:"win"}); //add some data
     jsonContent = JSON.stringify(winCounter);; //convert it back to json
     fs.writeFile('output.json', jsonContent, 'utf8', function(err, result){
         if (err){
