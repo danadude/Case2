@@ -28,7 +28,7 @@ async function boardToArray(){
     return boardArray;
 }
 
-
+//skapar ett tomt bräde att göra första jämnförelsen med
 async function cleanBoardToArray(){
   let boardArray = [];
   for(i = 0; i < 42; i++){
@@ -85,38 +85,35 @@ module.exports = function () {
   this.When(/^two bots have played until someone wins$/, async function () {
     thePBoard = await cleanBoardToArray()
     await sleep(2000)
-    console.log(thePBoard)
     theBoard = await boardToArray()
-        console.log(theBoard)
     for (i = 0; i < theBoard.length; i++) { 
       if(theBoard[i].includes('red') !=thePBoard[i].includes('red')){
-        red_brick = i + 15
-        console.log(red_brick)
-        if (red_brick == 15 || red_brick == 22 || 29 == red_brick || red_brick == 36 || red_brick == 15 ){
+        red_brick = i
+        if (red_brick == 0 || red_brick == 7 || red_brick == 14|| red_brick == 21 || red_brick == 28 || red_brick == 35){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(9)'))
           await gamesolverHumanClick.click()  
           
-      }else if (16 === red_brick || red_brick === 23 || 30 === red_brick || red_brick === 37 || 44 === red_brick || red_brick === 51){
+      }else if (red_brick == 1|| red_brick == 8 || red_brick == 15|| red_brick == 22 || red_brick === 29 || red_brick == 36){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(15)'))
           await gamesolverHumanClick.click()  
   
-      }else if (17 === red_brick || red_brick === 24 || 31 === red_brick || red_brick === 38 || 45 === red_brick || red_brick === 52){
+      }else if (red_brick == 2|| red_brick == 9 || red_brick == 16|| red_brick == 23 || red_brick === 30 || red_brick == 37){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(21)'))
           await gamesolverHumanClick.click()  
   
-      }else if (18 === red_brick || red_brick === 25 || 32 === red_brick || red_brick === 39 || 46 === red_brick || red_brick === 53){
+      }else if (red_brick == 3|| red_brick == 10 || red_brick == 17|| red_brick == 24 || red_brick === 31 || red_brick == 38){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(27)'))
           await gamesolverHumanClick.click()  
   
-      }else if (19 === red_brick || red_brick === 26 || 33 === red_brick ||red_brick === 40 || 47 === red_brick || red_brick === 54){
+      }else if (red_brick == 4|| red_brick == 11 || red_brick == 18|| red_brick == 25 || red_brick === 32 || red_brick == 39){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(33)'))
           await gamesolverHumanClick.click()  
   
-      }else if (20 === red_brick || red_brick === 27 || 34 === red_brick || red_brick === 41 || 48 === red_brick || red_brick === 55){
+      }else if (red_brick == 5|| red_brick == 12 || red_brick == 19|| red_brick == 26 || red_brick === 33 || red_brick == 40){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(39)'))
           await gamesolverHumanClick.click()  
   
-      }else if (21 === red_brick || red_brick === 28 || 35 === red_brick || red_brick === 42 || 49 === red_brick || red_brick === 56){
+      }else if (red_brick == 6|| red_brick == 13 || red_brick == 20|| red_brick == 27 || red_brick === 34 || red_brick == 41){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(45)'))
           await gamesolverHumanClick.click()  
   
@@ -134,53 +131,47 @@ module.exports = function () {
       width = await elem.getAttribute('style')
       if(width.includes('left')){
         playTracker.push(width);
-        console.log('kuk')
       }
     }
     widthCount = playTracker.length - 1
-    console.log(playTracker)
-    console.log(playTracker.length)
-    if(playTracker[widthCount].includes('left: 0%')){ clickCol(0); console.log('bajs 1')}
-    if(playTracker[widthCount].includes('left: 14.2857%')){ clickCol(1); console.log('bajs 2')}
-    if(playTracker[widthCount].includes('left: 28.5714%')){ clickCol(2); console.log('bajs 3')}
-    if(playTracker[widthCount].includes('left: 42.8571%')){ clickCol(3); console.log('bajs 4')}
-    if(playTracker[widthCount].includes('left: 57.1429%')){ clickCol(4); console.log('bajs 5')}
-    if(playTracker[widthCount].includes('left: 71.4286%')){ clickCol(5); console.log('bajs 6')}
-    if(playTracker[widthCount].includes('left: 85.7143%')){ clickCol(6); console.log('bajs 7')}
+    if(playTracker[widthCount].includes('left: 0%')){ clickCol(0); console.log('clicking col 1')}
+    if(playTracker[widthCount].includes('left: 14.2857%')){ clickCol(1); console.log('clicking col 2')}
+    if(playTracker[widthCount].includes('left: 28.5714%')){ clickCol(2); console.log('clicking col 3')}
+    if(playTracker[widthCount].includes('left: 42.8571%')){ clickCol(3); console.log('clicking col 4')}
+    if(playTracker[widthCount].includes('left: 57.1429%')){ clickCol(4); console.log('clicking col 5')}
+    if(playTracker[widthCount].includes('left: 71.4286%')){ clickCol(5); console.log('clicking col 6')}
+    if(playTracker[widthCount].includes('left: 85.7143%')){ clickCol(6); console.log('clicking col 7')}
 
     await sleep(2000)
-    console.log(thePBoard)
     theBoard = await boardToArray()
-        console.log(theBoard)
     for (i = 0; i < theBoard.length; i++) { 
       if(theBoard[i].includes('red') !=thePBoard[i].includes('red')){
-        red_brick = i + 15
-        console.log(red_brick)
-        if (red_brick == 15 || red_brick == 22 || 29 == red_brick || red_brick == 36 || red_brick == 15 ){
+        red_brick = i
+        if (red_brick == 0 || red_brick == 7 || red_brick == 14|| red_brick == 21 || red_brick == 28 || red_brick == 35){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(9)'))
           await gamesolverHumanClick.click()  
           
-      }else if (16 === red_brick || red_brick === 23 || 30 === red_brick || red_brick === 37 || 44 === red_brick || red_brick === 51){
+      }else if (red_brick == 1|| red_brick == 8 || red_brick == 15|| red_brick == 22 || red_brick === 29 || red_brick == 36){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(15)'))
           await gamesolverHumanClick.click()  
   
-      }else if (17 === red_brick || red_brick === 24 || 31 === red_brick || red_brick === 38 || 45 === red_brick || red_brick === 52){
+      }else if (red_brick == 2|| red_brick == 9 || red_brick == 16|| red_brick == 23 || red_brick === 30 || red_brick == 37){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(21)'))
           await gamesolverHumanClick.click()  
   
-      }else if (18 === red_brick || red_brick === 25 || 32 === red_brick || red_brick === 39 || 46 === red_brick || red_brick === 53){
+      }else if (red_brick == 3|| red_brick == 10 || red_brick == 17|| red_brick == 24 || red_brick === 31 || red_brick == 38){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(27)'))
           await gamesolverHumanClick.click()  
   
-      }else if (19 === red_brick || red_brick === 26 || 33 === red_brick ||red_brick === 40 || 47 === red_brick || red_brick === 54){
+      }else if (red_brick == 4|| red_brick == 11 || red_brick == 18|| red_brick == 25 || red_brick === 32 || red_brick == 39){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(33)'))
           await gamesolverHumanClick.click()  
   
-      }else if (20 === red_brick || red_brick === 27 || 34 === red_brick || red_brick === 41 || 48 === red_brick || red_brick === 55){
+      }else if (red_brick == 5|| red_brick == 12 || red_brick == 19|| red_brick == 26 || red_brick === 33 || red_brick == 40){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(39)'))
           await gamesolverHumanClick.click()  
   
-      }else if (21 === red_brick || red_brick === 28 || 35 === red_brick || red_brick === 42 || 49 === red_brick || red_brick === 56){
+      }else if (red_brick == 6|| red_brick == 13 || red_brick == 20|| red_brick == 27 || red_brick === 34 || red_brick == 41){
           let gamesolverHumanClick = await gamesolverDriver.findElement(by.css('#board > div:nth-child(45)'))
           await gamesolverHumanClick.click()  
   
@@ -197,19 +188,16 @@ module.exports = function () {
       width = await elem.getAttribute('style')
       if(width.includes('left')){
         playTracker.push(width);
-        console.log('kuk')
       }
     }
     widthCount = playTracker.length - 1
-    console.log(playTracker)
-    console.log(playTracker.length)
-    if(playTracker[widthCount].includes('left: 0%')){ clickCol(0); console.log('bajs 1')}
-    if(playTracker[widthCount].includes('left: 14.2857%')){ clickCol(1); console.log('bajs 2')}
-    if(playTracker[widthCount].includes('left: 28.5714%')){ clickCol(2); console.log('bajs 3')}
-    if(playTracker[widthCount].includes('left: 42.8571%')){ clickCol(3); console.log('bajs 4')}
-    if(playTracker[widthCount].includes('left: 57.1429%')){ clickCol(4); console.log('bajs 5')}
-    if(playTracker[widthCount].includes('left: 71.4286%')){ clickCol(5); console.log('bajs 6')}
-    if(playTracker[widthCount].includes('left: 85.7143%')){ clickCol(6); console.log('bajs 7')}
+    if(playTracker[widthCount].includes('left: 0%')){ clickCol(0); console.log('clicking col 1')}
+    if(playTracker[widthCount].includes('left: 14.2857%')){ clickCol(1); console.log('clicking col 2')}
+    if(playTracker[widthCount].includes('left: 28.5714%')){ clickCol(2); console.log('clicking col 3')}
+    if(playTracker[widthCount].includes('left: 42.8571%')){ clickCol(3); console.log('clicking col 4')}
+    if(playTracker[widthCount].includes('left: 57.1429%')){ clickCol(4); console.log('clicking col 5')}
+    if(playTracker[widthCount].includes('left: 71.4286%')){ clickCol(5); console.log('clicking col 6')}
+    if(playTracker[widthCount].includes('left: 85.7143%')){ clickCol(6); console.log('clicking col 7')}
 
 
 await sleep(5000)
