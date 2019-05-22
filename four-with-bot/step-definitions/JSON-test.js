@@ -2,10 +2,16 @@ let {$, sleep, clickCol, playGame, jsonWriteData} = require('./funcs');
 let sleepTime = 500;
 const fs = require('fs');
  
-//detta är arrayen som objekten sparas i av jsonWriteData()
+/*//detta är arrayen som objekten sparas i av jsonWriteData()
 let winCounter = {
   vinnare: []
-};
+};*/
+
+let winCounter = {
+    spelare1: [],
+    spelare2:[],
+    draw:[]
+  };
 
 
 // stringify JSON Object (för att kunna spara den sen)
@@ -76,11 +82,19 @@ module.exports = function(){
     let words=JSON.parse(data);
     console.log(words)
 
-
+    let test10 = words.spelare1
+    let test11 = words.spelare2
+    console.log(test10.length)
+    console.log(test11.length)
  });
 
 
 }
 
 
+//kan parsa in antalet object i arrayen från JSON
+//ändra nu arrayen (winCounter) till player 1 och player 2 med bara win
+//hämta infon med fs.readfileSync
+//Spara in 2 variabler, asserta dem mot varandra för att kontrollera den ena är större.
 
+//{"vinnare":[{"spelare":1,"win":"win"},{"spelare":1,"win":"win"}]}
