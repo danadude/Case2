@@ -76,7 +76,8 @@ module.exports = function(){
     let words=JSON.parse(data);
     console.log(words)
 
-
+    let test10 = words.vinnare
+    console.log(test10.length)
  });
 
 
