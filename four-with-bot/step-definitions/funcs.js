@@ -82,3 +82,68 @@ async function checkIfGameIsFinished() {
 }
 
 module.exports.checkIfGameIsFinished = checkIfGameIsFinished;
+
+async function jsonWriteData() {
+  const fs = require('fs');
+  let gameInfo = await driver.findElement(by.css('h3')).getText()
+  
+
+  if (gameInfo.includes('Spelare 1 vann,')) {
+
+    fs.readFile('output.json', 'utf8', function readFileCallback(err, jsonContent) {
+      if (err) {
+        console.log(err);
+      } else {
+        winCounter = JSON.parse(jsonContent); //now it an object
+        winCounter.vinnare.push({ spelare: 1, win: "win" }); //add some data
+        jsonContent = JSON.stringify(winCounter); //convert it back to json
+        fs.writeFile('output.json', jsonContent, 'utf8', function (err, result) {
+          if (err) {
+            console.log(err);
+          }
+        })
+        console.log("JSON file has been saved.");
+      }
+    })
+
+  } else if (gameInfo.includes('Spelare 2 vann,')) {
+
+    fs.readFile('output.json', 'utf8', function readFileCallback(err, jsonContent) {
+      if (err) {
+        console.log(err);
+      } else {
+        winCounter = JSON.parse(jsonContent); //now it an object
+        winCounter.vinnare.push({ spelare: 2, win: "win" }); //add some data
+        jsonContent = JSON.stringify(winCounter);; //convert it back to json
+        fs.writeFile('output.json', jsonContent, 'utf8', function (err, result) {
+          if (err) {
+            console.log(err);
+          }
+        })
+        console.log("JSON file has been saved.");
+      }
+    })
+
+  } else {
+
+    fs.readFile('output.json', 'utf8', function readFileCallback(err, jsonContent) {
+      if (err) {
+        console.log(err);
+      } else {
+        winCounter = JSON.parse(jsonContent); //now it an object
+        winCounter.vinnare.push({ spelare: 0, win: "draw" }); //add some data
+        jsonContent = JSON.stringify(winCounter);; //convert it back to json
+        fs.writeFile('output.json', jsonContent, 'utf8', function (err, result) {
+          if (err) {
+            console.log(err);
+          }
+        })
+        console.log("JSON file has been saved.");
+      }
+    })
+  }
+  
+
+}
+
+module.exports.jsonWriteData = jsonWriteData
