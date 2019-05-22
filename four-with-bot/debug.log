@@ -296,3 +296,6 @@
 [0522/011225.412:ERROR:exception_snapshot_win.cc(98)] thread ID 9732 not found in process
 [0522/011402.667:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
 [0522/011402.668:ERROR:exception_snapshot_win.cc(98)] thread ID 4232 not found in process
+[0522/080749.144:ERROR:process_reader_win.cc(151)] SuspendThread: Åtkomst nekad. (0x5)
+[0522/080749.175:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
+[0522/080749.181:ERROR:exception_snapshot_win.cc(98)] thread ID 1952 not found in process
