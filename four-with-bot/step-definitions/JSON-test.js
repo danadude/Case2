@@ -1,15 +1,15 @@
-let {$, sleep, clickCol, playGame} = require('./funcs');
+let {$, sleep, clickCol, playGame, jsonWriteData} = require('./funcs');
 let sleepTime = 500;
 const fs = require('fs');
  
-
+//detta är arrayen som objekten sparas i av jsonWriteData()
 let winCounter = {
   vinnare: []
 };
- 
+
 
 // stringify JSON Object (för att kunna spara den sen)
-var jsonContent = JSON.stringify(winCounter); //tidigare jsonObj
+//var jsonContent = JSON.stringify(winCounter); //tidigare jsonObj
 
 module.exports = function(){
   // Background
@@ -70,26 +70,14 @@ module.exports = function(){
   // asserting agianst the text on the page
   assert(gameInfo.includes('Spelare 1 vann,'), 'Matchar EJ')
   
-  //JSON TESTING GROUNDS!! BE AWARE!! LIVE AMMUNITION!!
-  
-  if (gameInfo.includes('Spelare 1 vann,')){
+    await jsonWriteData();
 
-  fs.readFile('output.json', 'utf8', function readFileCallback(err, jsonContent){
-    if (err){
-        console.log(err);
-    } else {
-    winCounter = JSON.parse(jsonContent); //now it an object
-    winCounter.vinnare.push({spelare:1, win:"win"}); //add some data
-    jsonContent = JSON.stringify(winCounter);; //convert it back to json
-    fs.writeFile('output.json', jsonContent, 'utf8', function(err, result){
-        if (err){
-            console.log(err);
-    }
-    })
-    console.log("JSON file has been saved.");
-    }})
-    }
-    });
+    let data=fs.readFileSync('output.json', 'utf8');
+    let words=JSON.parse(data);
+    console.log(words)
+
+
+ });
 
 
 }
