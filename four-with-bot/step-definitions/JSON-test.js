@@ -96,5 +96,3 @@ module.exports = function(){
 //ändra nu arrayen (winCounter) till player 1 och player 2 med bara win
 //hämta infon med fs.readfileSync
 //Spara in 2 variabler, asserta dem mot varandra för att kontrollera den ena är större.
-
-//{"vinnare":[{"spelare":1,"win":"win"},{"spelare":1,"win":"win"}]}

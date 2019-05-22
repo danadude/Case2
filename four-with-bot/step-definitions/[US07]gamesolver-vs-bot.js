@@ -1,5 +1,6 @@
-let { $, sleep, clickCol } = require('./funcs');
+let { $, sleep, clickCol, jsonWriteData } = require('./funcs');
 const { Builder } = require('selenium-webdriver');
+const fs = require('fs');
 let gamesolverDriver;
 let thePBoard;
 let theBoard
@@ -8,6 +9,7 @@ let player2
 let i;
 let playTracker = []
 let color
+let winCounter = {spelare1: [], spelare2:[], draw:[]};
 
 function $$(cssSelector) {
   return $(cssSelector, gamesolverDriver);
@@ -204,9 +206,18 @@ await sleep(5000)
     
   });
 
-  this.Then(/^the gamesolver bot should always win$/, function (callback) {
-    // Write code here that turns the phrase above into concrete actions
-    callback(null, 'pending');
+  this.Then(/^the gamesolver bot should always win$/, function () {
+     
+    await jsonWriteData();
+
+    let data=fs.readFileSync('output.json', 'utf8');
+    let words=JSON.parse(data);
+    console.log(words)
+
+    let spelare1 = words.spelare1
+    let spelare2 = words.spelare2
+    console.log(spelare1.length)
+    console.log(spelare2.length)
   });
  
 
