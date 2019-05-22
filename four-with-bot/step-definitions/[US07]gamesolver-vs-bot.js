@@ -174,10 +174,10 @@ module.exports = function () {
     let words=JSON.parse(data);
     console.log(words)
 
-    let spelare1 = words.spelare1
-    let spelare2 = words.spelare2
-    console.log(spelare1.length)
-    console.log(spelare2.length)
+    let player1 = words.spelare1
+    let player2 = words.spelare2
+    console.log(player1.length)
+    console.log(player2.length)
   });
  
 
