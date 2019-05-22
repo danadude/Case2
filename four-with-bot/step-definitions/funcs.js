@@ -56,6 +56,17 @@ async function boardToArray() {
 
 module.exports.boardToArray = boardToArray;
 
+async function cleanBoardToArray(){
+  let boardArray = [];
+  for(i = 0; i < 42; i++){
+    let color = 'empty';
+    boardArray.push(color);
+  }
+  return boardArray;
+}
+
+module.exports.cleanBoardToArray = cleanBoardToArray;
+
 async function checkIfGameIsFinished() {
   while (true) {
     let gameInfoH3 = await $('.game-info h3')
