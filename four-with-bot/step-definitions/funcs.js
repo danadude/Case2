@@ -95,7 +95,7 @@ async function jsonWriteData() {
         console.log(err);
       } else {
         winCounter = JSON.parse(jsonContent); //now it an object
-        winCounter.vinnare.push({ spelare: 1, win: "win" }); //add some data
+        winCounter.spelare1.push({ win: "win" }); //add some data
         jsonContent = JSON.stringify(winCounter); //convert it back to json
         fs.writeFile('output.json', jsonContent, 'utf8', function (err, result) {
           if (err) {
@@ -113,7 +113,7 @@ async function jsonWriteData() {
         console.log(err);
       } else {
         winCounter = JSON.parse(jsonContent); //now it an object
-        winCounter.vinnare.push({ spelare: 2, win: "win" }); //add some data
+        winCounter.spelare2.push({ win: "win" }); //add some data
         jsonContent = JSON.stringify(winCounter);; //convert it back to json
         fs.writeFile('output.json', jsonContent, 'utf8', function (err, result) {
           if (err) {
@@ -131,7 +131,7 @@ async function jsonWriteData() {
         console.log(err);
       } else {
         winCounter = JSON.parse(jsonContent); //now it an object
-        winCounter.vinnare.push({ spelare: 0, win: "draw" }); //add some data
+        winCounter.draw.push({ win: "draw" }); //add some data
         jsonContent = JSON.stringify(winCounter);; //convert it back to json
         fs.writeFile('output.json', jsonContent, 'utf8', function (err, result) {
           if (err) {
