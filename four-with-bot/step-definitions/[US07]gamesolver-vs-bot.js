@@ -1,9 +1,10 @@
 let { $, sleep, clickCol, boardToArray, cleanBoardToArray, jsonWriteData} = require("./funcs");
 const { Builder } = require("selenium-webdriver");
 const fs = require("fs");
-let gamesolverDriver, thePBoard, theBoard, widthCount, player2, color, gameInfoH3, text, gamesPlayed, gamesToPlay, restart, spelare2, spelare1;
+let gamesolverDriver, thePBoard, theBoard, widthCount, player2, color, gameInfoH3, text, gamesPlayed, gamesToPlay, restart, scenarioName;
 let playTracker = [];
-let playTester = [];
+let spelare1 = 0
+let spelare2 = 0
 let winCounter = { spelare1: [], spelare2: [], draw: [] };
 let sleepTime = 500;
 
@@ -144,6 +145,11 @@ async function playGamesolverBoard() {
 module.exports = function() {
   // Background
 
+  this.Before(function (scenario, callback) {
+    scenarioName = scenario
+    callback();
+});
+
   this.When(/^I choose to play as a bot and a human$/, async function() {
     let typeChoiceButtons = await $(".type-choice-btn");
     let choiceArray = ["Bot", "Människa"];
@@ -186,7 +192,7 @@ module.exports = function() {
     async function() {
       thePBoard = await cleanBoardToArray();
       gamesPlayed = 0;
-      gamesToPlay = 3;
+      gamesToPlay = 1;
       do {
         while (true) {
           gameInfoH3 = await $(".game-info h3");
@@ -221,7 +227,6 @@ module.exports = function() {
           await sleep(sleepTime);
         }
         gamesPlayed++;
-        console.log(gamesPlayed);
         // Klickar och startar en ny match igen.
         if (gamesPlayed < gamesToPlay) {
           jsonWriteData();
@@ -251,11 +256,11 @@ module.exports = function() {
   this.Then(/^the gamesolver bot should always win$/, async function() {
     let data = fs.readFileSync("output.json", "utf8");
     let words = JSON.parse(data);
-    console.log(words);
-
-    let player1 = words.spelare1;
-    let player2 = words.spelare2;
-    console.log(player1.length);
-    console.log(player2.length);
+    let player1 = words.spelare1.length;
+    let player2 = words.spelare2.length;
+    let totalAmount = player1 + player2
+    assert(player1 == 0, 'Gamesolver har inte vunnit alla spel')
+    assert(spelare1 < spelare2, 'Four-With-Bot har vunnit flest matcher')
+    scenarioName.attach(`Gamesolver have won ${player2} of the ${totalAmount} games played`, 'text/rtf');
   });
 };
