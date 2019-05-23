@@ -299,3 +299,5 @@
 [0522/080749.144:ERROR:process_reader_win.cc(151)] SuspendThread: Åtkomst nekad. (0x5)
 [0522/080749.175:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
 [0522/080749.181:ERROR:exception_snapshot_win.cc(98)] thread ID 1952 not found in process
+[0522/143015.645:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
+[0522/143015.666:ERROR:exception_snapshot_win.cc(98)] thread ID 8784 not found in process

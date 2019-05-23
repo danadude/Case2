@@ -3,6 +3,7 @@ const { Builder } = require('selenium-webdriver');
 const fs = require('fs');
 let gamesolverDriver, thePBoard, theBoard, widthCount, player2, color, gameInfoH3, text, gamesPlayed, gamesToPlay, restart, spelare2, spelare1
 let playTracker = []
+let playTester = []
 let winCounter = {spelare1: [], spelare2:[], draw:[]};
 let sleepTime = 500;
 
@@ -12,6 +13,7 @@ function $$(cssSelector) {
  
 async function playOurBoard(){
   player2 = await $$('.player2')
+  playTracker = []
   for(let elem of player2){
     width = await elem.getAttribute('style')
     if(width.includes('left')){
@@ -19,13 +21,13 @@ async function playOurBoard(){
     }
   }
   widthCount = playTracker.length - 1
-  if(playTracker[widthCount].includes('left: 0%')){ clickCol(0); console.log('clicking col 1')}
-  if(playTracker[widthCount].includes('left: 14.2857%')){ clickCol(1); console.log('clicking col 2')}
-  if(playTracker[widthCount].includes('left: 28.5714%')){ clickCol(2); console.log('clicking col 3')}
-  if(playTracker[widthCount].includes('left: 42.8571%')){ clickCol(3); console.log('clicking col 4')}
-  if(playTracker[widthCount].includes('left: 57.1429%')){ clickCol(4); console.log('clicking col 5')}
-  if(playTracker[widthCount].includes('left: 71.4286%')){ clickCol(5); console.log('clicking col 6')}
-  if(playTracker[widthCount].includes('left: 85.7143%')){ clickCol(6); console.log('clicking col 7')}
+  if(playTracker[widthCount].includes('left: 0%')){ clickCol(0)}
+  if(playTracker[widthCount].includes('left: 14.2857%')){ clickCol(1)}
+  if(playTracker[widthCount].includes('left: 28.5714%')){ clickCol(2)}
+  if(playTracker[widthCount].includes('left: 42.8571%')){ clickCol(3)}
+  if(playTracker[widthCount].includes('left: 57.1429%')){ clickCol(4)}
+  if(playTracker[widthCount].includes('left: 71.4286%')){ clickCol(5)}
+  if(playTracker[widthCount].includes('left: 85.7143%')){ clickCol(6)}
 }
 
 async function playGamesolverBoard(){
@@ -110,7 +112,7 @@ module.exports = function () {
     await sleep(sleepTime * 2);
   });
 
-  this.When(/^two bots have played until someone wins$/,{ timeout: 120 * 1000 }, async function () {
+  this.When(/^two bots have played until someone wins$/,{ timeout: 10000000 }, async function () {
     thePBoard = await cleanBoardToArray()
     gamesPlayed = 0
     gamesToPlay = 3
@@ -131,9 +133,9 @@ module.exports = function () {
           continue;
         }
         if (text.includes("Spelare 2, drag")) {
-          await sleep(2000)
+          await sleep(sleepTime)
           await playGamesolverBoard()
-          await sleep(2000)
+          await sleep(1000)
           await playOurBoard()
         }
         if (text.includes("oavgjort") || text.includes("vann")) {
@@ -145,6 +147,7 @@ module.exports = function () {
           }
           break;
         }
+        await sleep(sleepTime)
       }
       gamesPlayed++;
       console.log(gamesPlayed);
@@ -158,15 +161,20 @@ module.exports = function () {
         await sleep(sleepTime * 2);
         restart = await $$('#new');
         await restart.click();
-        await sleep(sleepTime * 2);
-        cleanBoardToArray
+        await sleep(sleepTime)
+        await gamesolverDriver.navigate().refresh();
+        thePBoard = await cleanBoardToArray()
+        await sleep(sleepTime)
+        player2Button = await $$('#player_2');
+        await player2Button.click();
+        await sleep(sleepTime * 4);
       }
     } while (gamesPlayed < gamesToPlay);
 
     
   });
 
-  this.Then(/^the gamesolver bot should always win$/, function () {
+  this.Then(/^the gamesolver bot should always win$/,async function () {
      
     await jsonWriteData();
 
