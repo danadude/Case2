@@ -15,7 +15,7 @@ module.exports = function () {
         await playGame("1616161")
       });
 
-    this.Then(/^that player should win$/, async function () {
+      this.Then(/^he\/she should win$/, async function () {
 
         let gameInfo = await driver.findElement(by.css('h3 > span')).getText()
         await gameInfo

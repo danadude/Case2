@@ -16,7 +16,7 @@ Scenario: Horizontal win
 
 Scenario: Congratulating the winner
   When a player has played 4 bricks that connect either horizontaly, verticaly or diagonaly
-  Then that player should win
+  Then he/she should win
   And A message that congratulates the winner should be shown
 
 Scenario: Announcing a draw
