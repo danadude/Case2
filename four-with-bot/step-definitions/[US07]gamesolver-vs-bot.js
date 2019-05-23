@@ -261,6 +261,6 @@ module.exports = function() {
     let totalAmount = player1 + player2
     assert(player1 == 0, 'Gamesolver har inte vunnit alla spel')
     assert(spelare1 < spelare2, 'Four-With-Bot har vunnit flest matcher')
-    scenarioName.attach(`Gamesolver have won ${player2} of the ${totalAmount} games played`, 'text/rtf');
+    scenarioName.attach(`Gamesolver has won ${player2} of the ${totalAmount} games played`, 'text/html');
   });
 };
