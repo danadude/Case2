@@ -94,7 +94,7 @@ async function checkIfGameIsFinished() {
 
 module.exports.checkIfGameIsFinished = checkIfGameIsFinished;
 
-async function jsonWriteData() {
+ async function jsonWriteData() {
   const fs = require('fs');
   let gameInfo = await driver.findElement(by.css('h3')).getText()
   
