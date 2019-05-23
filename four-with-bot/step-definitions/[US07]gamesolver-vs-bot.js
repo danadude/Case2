@@ -1,26 +1,7 @@
-let {
-  $,
-  sleep,
-  clickCol,
-  boardToArray,
-  cleanBoardToArray,
-  jsonWriteData
-} = require("./funcs");
+let { $, sleep, clickCol, boardToArray, cleanBoardToArray, jsonWriteData} = require("./funcs");
 const { Builder } = require("selenium-webdriver");
 const fs = require("fs");
-let gamesolverDriver,
-  thePBoard,
-  theBoard,
-  widthCount,
-  player2,
-  color,
-  gameInfoH3,
-  text,
-  gamesPlayed,
-  gamesToPlay,
-  restart,
-  spelare2,
-  spelare1;
+let gamesolverDriver, thePBoard, theBoard, widthCount, player2, color, gameInfoH3, text, gamesPlayed, gamesToPlay, restart, spelare2, spelare1;
 let playTracker = [];
 let playTester = [];
 let winCounter = { spelare1: [], spelare2: [], draw: [] };
