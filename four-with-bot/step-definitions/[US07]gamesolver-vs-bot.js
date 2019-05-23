@@ -50,86 +50,40 @@ async function playGamesolverBoard() {
   for (i = 0; i < theBoard.length; i++) {
     if (theBoard[i].includes("red") != thePBoard[i].includes("red")) {
       red_brick = i;
-      if (
-        red_brick == 0 ||
-        red_brick == 7 ||
-        red_brick == 14 ||
-        red_brick == 21 ||
-        red_brick == 28 ||
-        red_brick == 35
-      ) {
+      do {
+        red_brick = red_brick - 7;
+      } while (red_brick > 6);
+      if (red_brick == 0) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(9)")
         );
         await gamesolverHumanClick.click();
-      } else if (
-        red_brick == 1 ||
-        red_brick == 8 ||
-        red_brick == 15 ||
-        red_brick == 22 ||
-        red_brick === 29 ||
-        red_brick == 36
-      ) {
+      } else if (red_brick == 1) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(15)")
         );
         await gamesolverHumanClick.click();
-      } else if (
-        red_brick == 2 ||
-        red_brick == 9 ||
-        red_brick == 16 ||
-        red_brick == 23 ||
-        red_brick === 30 ||
-        red_brick == 37
-      ) {
+      } else if (red_brick == 2) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(21)")
         );
         await gamesolverHumanClick.click();
-      } else if (
-        red_brick == 3 ||
-        red_brick == 10 ||
-        red_brick == 17 ||
-        red_brick == 24 ||
-        red_brick === 31 ||
-        red_brick == 38
-      ) {
+      } else if (red_brick == 3) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(27)")
         );
         await gamesolverHumanClick.click();
-      } else if (
-        red_brick == 4 ||
-        red_brick == 11 ||
-        red_brick == 18 ||
-        red_brick == 25 ||
-        red_brick === 32 ||
-        red_brick == 39
-      ) {
+      } else if (red_brick == 4) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(33)")
         );
         await gamesolverHumanClick.click();
-      } else if (
-        red_brick == 5 ||
-        red_brick == 12 ||
-        red_brick == 19 ||
-        red_brick == 26 ||
-        red_brick === 33 ||
-        red_brick == 40
-      ) {
+      } else if (red_brick == 5) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(39)")
         );
         await gamesolverHumanClick.click();
-      } else if (
-        red_brick == 6 ||
-        red_brick == 13 ||
-        red_brick == 20 ||
-        red_brick == 27 ||
-        red_brick === 34 ||
-        red_brick == 41
-      ) {
+      } else if (red_brick == 6) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(45)")
         );
@@ -145,10 +99,10 @@ async function playGamesolverBoard() {
 module.exports = function() {
   // Background
 
-  this.Before(function (scenario, callback) {
-    scenarioName = scenario
+  this.Before(function(scenario, callback) {
+    scenarioName = scenario;
     callback();
-});
+  });
 
   this.When(/^I choose to play as a bot and a human$/, async function() {
     let typeChoiceButtons = await $(".type-choice-btn");
@@ -230,7 +184,7 @@ module.exports = function() {
         // Klickar och startar en ny match igen.
         if (gamesPlayed < gamesToPlay) {
           jsonWriteData();
-          await sleep(100)
+          await sleep(100);
           againButton = await $(".again-btn");
           await againButton.click();
           await sleep(1000);
@@ -249,7 +203,7 @@ module.exports = function() {
         }
       } while (gamesPlayed < gamesToPlay);
       jsonWriteData();
-      await sleep(100)
+      await sleep(100);
     }
   );
 
@@ -258,9 +212,12 @@ module.exports = function() {
     let words = JSON.parse(data);
     let player1 = words.spelare1.length;
     let player2 = words.spelare2.length;
-    let totalAmount = player1 + player2
-    assert(player1 == 0, 'Gamesolver har inte vunnit alla spel')
-    assert(spelare1 < spelare2, 'Four-With-Bot har vunnit flest matcher')
-    scenarioName.attach(`Gamesolver has won ${player2} of the ${totalAmount} games played`, 'text/html');
+    let totalAmount = player1 + player2;
+    assert(player1 == 0, "Gamesolver har inte vunnit alla spel");
+    assert(spelare1 < spelare2, "Four-With-Bot har vunnit flest matcher");
+    scenarioName.attach(
+      `Gamesolver has won ${player2} of the ${totalAmount} games played`,
+      "text/html"
+    );
   });
 };
