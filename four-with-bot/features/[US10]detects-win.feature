@@ -1,3 +1,5 @@
+# [US10] As a user I want the application to follow the correct win conditions,  so that i can win
+
 Feature: Detect win
   As user I would like the app to detect all ways of winning (horizantal, vertical, diagonal in two directions).
  

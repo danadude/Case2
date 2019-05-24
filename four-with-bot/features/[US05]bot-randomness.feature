@@ -1,5 +1,4 @@
 # [US05] As a user I want the normal bot to have some randomness in its game choices, so that I can improve my own game
-# Tomas
 
 Feature: Check normal bot randomness vs normal bot
 

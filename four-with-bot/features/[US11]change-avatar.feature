@@ -1,3 +1,5 @@
+# [US11] As a user I want to be able to change the avatar, so i can look the way i want too
+
 Feature: change avatar
   As user I would like to change the avatar image
  
