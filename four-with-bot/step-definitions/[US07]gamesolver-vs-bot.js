@@ -50,46 +50,43 @@ async function playGamesolverBoard() {
   for (i = 0; i < theBoard.length; i++) {
     if (theBoard[i].includes("red") != thePBoard[i].includes("red")) {
       red_brick = i;
-      do {
-        red_brick = red_brick - 7;
-      } while (red_brick > 6);
-      if (red_brick == 0) {
+      if (red_brick == 0  || red_brick == 7 || red_brick == 14 || red_brick == 21 || red_brick == 28 || red_brick == 35) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(9)")
         );
         await gamesolverHumanClick.click();
-      } else if (red_brick == 1) {
+      } else if (red_brick == 1  || red_brick == 8 || red_brick == 15 || red_brick == 22 || red_brick == 29 || red_brick == 36) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(15)")
         );
         await gamesolverHumanClick.click();
-      } else if (red_brick == 2) {
+      } else if (red_brick == 2  || red_brick == 9 || red_brick == 16 || red_brick == 23 || red_brick == 30 || red_brick == 37) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(21)")
         );
         await gamesolverHumanClick.click();
-      } else if (red_brick == 3) {
+      } else if (red_brick == 3  || red_brick == 10 || red_brick == 17 || red_brick == 24 || red_brick == 31 || red_brick == 38) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(27)")
         );
         await gamesolverHumanClick.click();
-      } else if (red_brick == 4) {
+      } else if (red_brick == 4  || red_brick == 11 || red_brick == 18 || red_brick == 25 || red_brick == 32 || red_brick == 39) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(33)")
         );
         await gamesolverHumanClick.click();
-      } else if (red_brick == 5) {
+      } else if (red_brick == 5  || red_brick == 12 || red_brick == 19 || red_brick == 26 || red_brick == 33 || red_brick == 40) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(39)")
         );
         await gamesolverHumanClick.click();
-      } else if (red_brick == 6) {
+      } else if (red_brick == 6  || red_brick == 13 || red_brick == 20 || red_brick == 27 || red_brick == 34 || red_brick == 41) {
         let gamesolverHumanClick = await gamesolverDriver.findElement(
           by.css("#board > div:nth-child(45)")
         );
         await gamesolverHumanClick.click();
       } else {
-        alert("helvete");
+        console.log("helvete");
       }
     }
   }
@@ -146,7 +143,7 @@ module.exports = function() {
     async function() {
       thePBoard = await cleanBoardToArray();
       gamesPlayed = 0;
-      gamesToPlay = 1;
+      gamesToPlay = 3;
       do {
         while (true) {
           gameInfoH3 = await $(".game-info h3");
